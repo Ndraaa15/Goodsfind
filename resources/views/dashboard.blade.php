@@ -40,88 +40,30 @@
                             <span class="sr-only">Toggle mobile menu</span>
                             <i class="icon-bars"></i>
                         </button>
-
                         <a href="{{ route('homepage') }}" class="logo">
                             <img src="assets/images/logo.png" alt="Molla Logo" width="105" height="25">
                         </a>
                     </div><!-- End .header-left -->
-
                     <div class="header-right">
-                        <div class="header-search">
-                            <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
-                                <div class="header-search-wrapper">
-                                    <label for="q" class="sr-only">Search</label>
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search in..." required>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-heart-o"></i>
+                            </a>
+                        </div><!-- End .cart-dropdown -->
                         <div class="dropdown cart-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
-                                <span class="cart-count">2</span>
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                </div><!-- End .cart-product -->
-
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-
-                                    <span class="cart-total-price">$160.00</span>
-                                </div><!-- End .dropdown-cart-total -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .cart-dropdown -->
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-user"></i>
+                            </a>
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
-
         <main class="main">
             <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
                 <div class="container">
@@ -144,17 +86,13 @@
                                         <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Sign Out</a>
+                                        <a class="nav-link" href="{{ url('/auth/signout') }}">Sign Out</a>
                                     </li>
                                 </ul>
                             </aside><!-- End .col-lg-3 -->
-
                             <div class="col-md-8 col-lg-9">
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
@@ -163,82 +101,29 @@
                                             From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.
                                         </p>
                                     </div><!-- .End .tab-pane -->
-
                                     <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                         <p>No order has been made yet.</p>
                                         <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                                     </div><!-- .End .tab-pane -->
-
                                     <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
                                         <p>No downloads available yet.</p>
                                         <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                                     </div><!-- .End .tab-pane -->
-
-                                    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                        <p>The following addresses will be used on the checkout page by default.</p>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="card card-dashboard">
-                                                    <div class="card-body">
-                                                        <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
-
-                                                        <p>User Name<br>
-                                                            User Company<br>
-                                                            John str<br>
-                                                            New York, NY 10001<br>
-                                                            1-234-987-6543<br>
-                                                            yourmail@mail.com<br>
-                                                            <a href="#">Edit <i class="icon-edit"></i></a>
-                                                        </p>
-                                                    </div><!-- End .card-body -->
-                                                </div><!-- End .card-dashboard -->
-                                            </div><!-- End .col-lg-6 -->
-
-                                            <div class="col-lg-6">
-                                                <div class="card card-dashboard">
-                                                    <div class="card-body">
-                                                        <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
-
-                                                        <p>You have not set up this type of address yet.<br>
-                                                            <a href="#">Edit <i class="icon-edit"></i></a>
-                                                        </p>
-                                                    </div><!-- End .card-body -->
-                                                </div><!-- End .card-dashboard -->
-                                            </div><!-- End .col-lg-6 -->
-                                        </div><!-- End .row -->
-                                    </div><!-- .End .tab-pane -->
-
                                     <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                         <form action="#">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label>First Name *</label>
-                                                    <input type="text" class="form-control" required>
-                                                </div><!-- End .col-sm-6 -->
-
-                                                <div class="col-sm-6">
-                                                    <label>Last Name *</label>
-                                                    <input type="text" class="form-control" required>
-                                                </div><!-- End .col-sm-6 -->
-                                            </div><!-- End .row -->
-
+                                            <label> Name *</label>
+                                            <input type="text" class="form-control" required placeholder="{{ $user->name }}">
                                             <label>Display Name *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="text" class="form-control" required placeholder="{{ $user->display_name }}">
                                             <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
-
                                             <label>Email address *</label>
-                                            <input type="email" class="form-control" required>
-
+                                            <input type="email" class="form-control" required placeholder="{{ $user->email }}">
                                             <label>Current password (leave blank to leave unchanged)</label>
                                             <input type="password" class="form-control">
-
                                             <label>New password (leave blank to leave unchanged)</label>
                                             <input type="password" class="form-control">
-
                                             <label>Confirm new password</label>
                                             <input type="password" class="form-control mb-2">
-
                                             <button type="submit" class="btn btn-outline-primary-2">
                                                 <span>SAVE CHANGES</span>
                                                 <i class="icon-long-arrow-right"></i>
@@ -252,7 +137,6 @@
                 </div><!-- End .dashboard -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
-
         <footer class="footer">
             <div class="footer-middle">
                 <div class="container">
@@ -261,7 +145,6 @@
                             <div class="widget widget-about">
                                 <img src="assets/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
                                 <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
-
                                 <div class="social-icons">
                                     <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
                                     <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
@@ -271,11 +154,9 @@
                                 </div><!-- End .soial-icons -->
                             </div><!-- End .widget about-widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
-
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget">
                                 <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
-
                                 <ul class="widget-list">
                                     <li><a href="about.html">About Molla</a></li>
                                     <li><a href="#">How to shop on Molla</a></li>

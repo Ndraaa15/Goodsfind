@@ -21,8 +21,10 @@ Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 
 Route::get('/product', [ProductController::class, 'product'])->name('product');
 Route::get('/products', [ProductController::class, 'products'])->name('products');
+Route::post('/product', [ProductController::class, 'createProduct'])->name('create-product');
 
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
-Route::post('/auth/register', [AuthController::class, 'user_register']);
-Route::post('/auth/signin', [AuthController::class, 'user_signin']);
+Route::post('/auth/register', [AuthController::class, 'userRegister']);
+Route::post('/auth/signin', [AuthController::class, 'userSignin']);
+Route::get('/auth/signout', [AuthController::class, 'userSignout'])->name('signout');
 

@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('merchant_id');
             $table->string('name');
             $table->text('description');
             $table->decimal('price');
             $table->string('image');
             $table->string('category');
-            $table->string('total_reviews');
-            $table->string('star');
+            $table->string('condition');
+            $table->integer('stock');
+            $table->decimal('discount');
+            $table->integer('time_usage');
+            $table->boolean('is_promotion');
             $table->timestamps();
+            $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
         });
     }
 

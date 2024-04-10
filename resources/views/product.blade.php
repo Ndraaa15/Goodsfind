@@ -43,12 +43,10 @@
                             <span class="sr-only">Toggle mobile menu</span>
                             <i class="icon-bars"></i>
                         </button>
-
                         <a href="{{ route('homepage') }}" class="logo">
                             <img src="assets/images/logo.png" alt="Molla Logo" width="105" height="25">
                         </a>
                     </div><!-- End .header-left -->
-
                     <div class="header-right">
                         <div class="header-search">
                             <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
