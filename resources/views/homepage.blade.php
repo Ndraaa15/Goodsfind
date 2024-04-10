@@ -72,7 +72,9 @@
                                             </div><!-- End .header-menu -->
                                         </div>
                                     </li>
+                                    @if (!Auth::check())
                                     <li><a href="{{ route('auth') }}">Sign in / Sign up</a></li>
+                                    @endif
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->
@@ -98,12 +100,12 @@
                             </form>
                         </div><!-- End .header-search -->
                     </div>
+                    @if (Auth::check())
                     <div class="header-right">
                         <div class="wishlist">
                             <a href="{{ route('wishlist') }}" title="Wishlist">
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
-                                    <span class="wishlist-count badge">3</span>
                                 </div>
                                 <p>Wishlist</p>
                             </a>
@@ -112,60 +114,20 @@
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <div class="icon">
                                     <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count">2</span>
                                 </div>
                                 <p>Cart</p>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                </div><!-- End .cart-product -->
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-                                    <span class="cart-total-price">$160.00</span>
-                                </div><!-- End .dropdown-cart-total -->
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .cart-dropdown -->
+                        </div>
+                        <div class="wishlist">
+                            <a href="{{ route('dashboard') }}" title="Profile">
+                                <div class="icon">
+                                    <i class="icon-user"></i>
+                                </div>
+                                <p>Profile</p>
+                            </a>
+                        </div>
                     </div><!-- End .header-right -->
+                    @endif
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
@@ -192,27 +154,23 @@
                                                 <img src="assets/images/demos/demo-3/slider/slide-1.jpg" alt="Image Desc">
                                             </picture>
                                         </figure><!-- End .slide-image -->
-
                                         <div class="intro-content">
                                             <h3 class="intro-subtitle text-primary">Daily Deals</h3><!-- End .h3 intro-subtitle -->
                                             <h1 class="intro-title">
                                                 AirPods <br>Earphones
                                             </h1><!-- End .intro-title -->
-
                                             <div class="intro-price">
                                                 <sup>Today:</sup>
                                                 <span class="text-primary">
                                                     $247<sup>.99</sup>
                                                 </span>
                                             </div><!-- End .intro-price -->
-
                                             <a href="category.html" class="btn btn-primary btn-round">
                                                 <span>Click Here</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </a>
                                         </div><!-- End .intro-content -->
                                     </div><!-- End .intro-slide -->
-
                                     <div class="intro-slide">
                                         <figure class="slide-image">
                                             <picture>
@@ -220,20 +178,17 @@
                                                 <img src="assets/images/demos/demo-3/slider/slide-2.jpg" alt="Image Desc">
                                             </picture>
                                         </figure><!-- End .slide-image -->
-
                                         <div class="intro-content">
                                             <h3 class="intro-subtitle text-primary">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
                                             <h1 class="intro-title">
                                                 Echo Dot <br>3rd Gen
                                             </h1><!-- End .intro-title -->
-
                                             <div class="intro-price">
                                                 <sup class="intro-old-price">$49,99</sup>
                                                 <span class="text-primary">
                                                     $29<sup>.99</sup>
                                                 </span>
                                             </div><!-- End .intro-price -->
-
                                             <a href="category.html" class="btn btn-primary btn-round">
                                                 <span>Click Here</span>
                                                 <i class="icon-long-arrow-right"></i>
@@ -241,42 +196,35 @@
                                         </div><!-- End .intro-content -->
                                     </div><!-- End .intro-slide -->
                                 </div><!-- End .intro-slider owl-carousel owl-simple -->
-
                                 <span class="slider-loader"></span><!-- End .slider-loader -->
                             </div><!-- End .intro-slider-container -->
                         </div><!-- End .col-lg-8 -->
-
                         <div class="col-lg-4">
                             <div class="intro-banners">
                                 <div class="banner mb-lg-1 mb-xl-2">
                                     <a href="#">
                                         <img src="assets/images/demos/demo-3/banners/banner-1.jpg" alt="Banner">
                                     </a>
-
                                     <div class="banner-content">
                                         <h4 class="banner-subtitle d-lg-none d-xl-block"><a href="#">Top Product</a></h4><!-- End .banner-subtitle -->
                                         <h3 class="banner-title"><a href="#">Edifier <br>Stereo Bluetooth</a></h3><!-- End .banner-title -->
                                         <a href="#" class="banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
                                     </div><!-- End .banner-content -->
                                 </div><!-- End .banner -->
-
                                 <div class="banner mb-lg-1 mb-xl-2">
                                     <a href="#">
                                         <img src="assets/images/demos/demo-3/banners/banner-2.jpg" alt="Banner">
                                     </a>
-
                                     <div class="banner-content">
                                         <h4 class="banner-subtitle d-lg-none d-xl-block"><a href="#">Clearance</a></h4><!-- End .banner-subtitle -->
                                         <h3 class="banner-title"><a href="#">GoPro - Fusion 360 <span>Save $70</span></a></h3><!-- End .banner-title -->
                                         <a href="#" class="banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
                                     </div><!-- End .banner-content -->
                                 </div><!-- End .banner -->
-
                                 <div class="banner mb-0">
                                     <a href="#">
                                         <img src="assets/images/demos/demo-3/banners/banner-3.jpg" alt="Banner">
                                     </a>
-
                                     <div class="banner-content">
                                         <h4 class="banner-subtitle d-lg-none d-xl-block"><a href="#">Featured</a></h4><!-- End .banner-subtitle -->
                                         <h3 class="banner-title"><a href="#">Apple Watch 4 <span>Our Hottest Deals</span></a></h3><!-- End .banner-title -->
@@ -288,7 +236,6 @@
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .intro-section -->
-
             <div class="container featured">
                 <ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
                     <li class="nav-item">
@@ -301,7 +248,6 @@
                         <a class="nav-link" id="products-top-link" data-toggle="tab" href="#products-top-tab" role="tab" aria-controls="products-top-tab" aria-selected="false">Top Rated</a>
                     </li>
                 </ul>
-
                 <div class="tab-content tab-content-carousel">
                     <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel" aria-labelledby="products-featured-link">
                         <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
@@ -329,17 +275,14 @@
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-1.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Cameras & Camcorders</a>
@@ -356,7 +299,6 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <span class="product-label label-circle label-new">New</span>
@@ -364,17 +306,14 @@
                                         <img src="assets/images/demos/demo-3/products/product-2.jpg" alt="Product image" class="product-image">
                                         <img src="assets/images/demos/demo-3/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Smartwatches</a>
@@ -389,7 +328,6 @@
                                         </div><!-- End .ratings -->
                                         <span class="ratings-text">( 0 Reviews )</span>
                                     </div><!-- End .rating-container -->
-
                                     <div class="product-nav product-nav-dots">
                                         <a href="#" class="active" style="background: #e2e2e2;"><span class="sr-only">Color name</span></a>
                                         <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
@@ -397,23 +335,19 @@
                                     </div><!-- End .product-nav -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-3.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Laptops</a>
@@ -431,23 +365,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-4.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Digital Cameras</a>
@@ -464,23 +394,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-1.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Cameras & Camcorders</a>
@@ -525,17 +451,14 @@
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-4.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Digital Cameras</a>
@@ -552,23 +475,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-1.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Cameras & Camcorders</a>
@@ -585,23 +504,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-3.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Laptops</a>
@@ -619,7 +534,6 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <span class="product-label label-circle label-new">New</span>
@@ -627,17 +541,14 @@
                                         <img src="assets/images/demos/demo-3/products/product-2.jpg" alt="Product image" class="product-image">
                                         <img src="assets/images/demos/demo-3/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Smartwatches</a>
@@ -652,7 +563,6 @@
                                         </div><!-- End .ratings -->
                                         <span class="ratings-text">( 0 Reviews )</span>
                                     </div><!-- End .rating-container -->
-
                                     <div class="product-nav product-nav-dots">
                                         <a href="#" class="active" style="background: #e2e2e2;"><span class="sr-only">Color name</span></a>
                                         <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
@@ -688,17 +598,14 @@
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-3.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Laptops</a>
@@ -716,23 +623,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-1.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Cameras & Camcorders</a>
@@ -749,23 +652,19 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-4.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Digital Cameras</a>
@@ -782,7 +681,6 @@
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <span class="product-label label-circle label-new">New</span>
@@ -790,17 +688,14 @@
                                         <img src="assets/images/demos/demo-3/products/product-2.jpg" alt="Product image" class="product-image">
                                         <img src="assets/images/demos/demo-3/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Smartwatches</a>
@@ -815,7 +710,6 @@
                                         </div><!-- End .ratings -->
                                         <span class="ratings-text">( 0 Reviews )</span>
                                     </div><!-- End .rating-container -->
-
                                     <div class="product-nav product-nav-dots">
                                         <a href="#" class="active" style="background: #e2e2e2;"><span class="sr-only">Color name</span></a>
                                         <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
@@ -823,23 +717,19 @@
                                     </div><!-- End .product-nav -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
-
                             <div class="product product-2">
                                 <figure class="product-media">
                                     <a href="product.html">
                                         <img src="assets/images/demos/demo-3/products/product-1.jpg" alt="Product image" class="product-image">
                                     </a>
-
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                     </div><!-- End .product-action -->
-
                                     <div class="product-action product-action-dark">
                                         <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
                                         <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
-
                                 <div class="product-body">
                                     <div class="product-cat">
                                         <a href="#">Cameras & Camcorders</a>
@@ -860,9 +750,7 @@
                     </div><!-- .End .tab-pane -->
                 </div><!-- End .tab-content -->
             </div><!-- End .container -->
-
             <div class="mb-7 mb-lg-11"></div><!-- End .mb-7 -->
-
             <div class="container">
                 <div class="cta cta-border cta-border-image mb-5 mb-lg-7" style="background-image: url(assets/images/demos/demo-3/bg-1.jpg);">
                     <div class="cta-border-wrapper bg-white">
@@ -872,7 +760,6 @@
                                     <div class="cta-heading">
                                         <h3 class="cta-title text-right"><span class="text-primary">New Deals</span> <br>Start Daily at 12pm e.t.</h3><!-- End .cta-title -->
                                     </div><!-- End .cta-heading -->
-
                                     <div class="cta-text">
                                         <p>Get <span class="text-dark font-weight-normal">FREE SHIPPING* & 5% rewards</span> on <br>every order with Molla Theme rewards program</p>
                                     </div><!-- End .cta-text -->
@@ -883,14 +770,12 @@
                     </div><!-- End .bg-white -->
                 </div><!-- End .cta -->
             </div><!-- End .container -->
-
             <div class="bg-light deal-container pt-7 pb-7 mb-5">
                 <div class="container">
                     <div class="heading text-center mb-4">
                         <h2 class="title">Deals & Outlet</h2><!-- End .title -->
                         <p class="title-desc">Today’s deal and more</p><!-- End .title-desc -->
                     </div><!-- End .heading -->
-
                     <div class="row">
                         <div class="col-lg-6 deal-col">
                             <div class="deal" style="background-image: url('assets/images/demos/demo-3/deal/bg-1.jpg');">
@@ -898,18 +783,14 @@
                                     <h2>Deal of the Day.</h2>
                                     <h4>Limited quantities. </h4>
                                 </div><!-- End .deal-top -->
-
                                 <div class="deal-content">
                                     <h3 class="product-title"><a href="product.html">Home Smart Speaker with Google Assistant</a></h3><!-- End .product-title -->
-
                                     <div class="product-price">
                                         <span class="new-price">$129.00</span>
                                         <span class="old-price">Was $150.99</span>
                                     </div><!-- End .product-price -->
-
                                     <a href="product.html" class="btn btn-link"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .deal-content -->
-
                                 <div class="deal-bottom">
                                     <div class="deal-countdown" data-until="+10h"></div><!-- End .deal-countdown -->
                                 </div><!-- End .deal-bottom -->
@@ -926,7 +807,6 @@
                                                 <a href="product.html">
                                                     <img src="assets/images/demos/demo-3/products/product-5.jpg" alt="Product image" class="product-image">
                                                 </a>
-
                                                 <div class="product-action-vertical">
                                                     <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                                 </div><!-- End .product-action -->

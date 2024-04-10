@@ -30,13 +30,13 @@
 
 <body>
     @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
     <div class="page-wrapper">
         <main class="main">
@@ -114,6 +114,11 @@
                                         <div class="form-group">
                                             <label for="register-email-2">Name *</label>
                                             <input type="text" class="form-control" id="register-email-2" name="register-name" required />
+                                        </div>
+                                        <!-- End .form-group -->
+                                        <div class="form-group">
+                                            <label for="register-email-2">Display Name *</label>
+                                            <input type="text" class="form-control" id="register-email-2" name="register-display-name" required />
                                         </div>
                                         <!-- End .form-group -->
                                         <div class="form-group">

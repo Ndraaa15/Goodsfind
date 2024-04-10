@@ -642,6 +642,9 @@ blockquote.text-white cite span {
 .top-menu i.icon-heart-o {
     margin-top: -0.2rem;
 }
+.top-menu i.icon-user {
+    margin-top: -0.2rem;
+}
 .top-menu span {
     color: #c96;
     margin-left: 0.3rem;
@@ -15260,6 +15263,10 @@ button:focus {
 .icon-heart-o:before {
     content: "\f234";
 }
+.icon-user:before {
+    content: "\F4E1";
+}
+
 .icon-viacoin:before {
     content: "\f237";
 }

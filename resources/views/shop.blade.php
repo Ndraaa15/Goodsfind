@@ -43,12 +43,10 @@
                             <span class="sr-only">Toggle mobile menu</span>
                             <i class="icon-bars"></i>
                         </button>
-
                         <a href="{{ route('homepage') }}" class="logo">
                             <img src="assets/images/logo.png" alt="Molla Logo" width="105" height="25">
                         </a>
                     </div><!-- End .header-left -->
-
                     <div class="header-right">
                         <div class="header-search">
                             <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
@@ -64,7 +62,6 @@
                                 <i class="icon-shopping-cart"></i>
                                 <span class="cart-count">2</span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
                                     <div class="product">
@@ -72,7 +69,6 @@
                                             <h4 class="product-title">
                                                 <a href="product.html">Beige knitted elastic runner shoes</a>
                                             </h4>
-
                                             <span class="cart-product-info">
                                                 <span class="cart-product-qty">1</span>
                                                 x $84.00
