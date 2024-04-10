@@ -152,7 +152,7 @@
                                         <div class="col-6 col-lg-3">
                                             <figure class="product-media">
                                                 <span class="product-label label-new">New</span>
-                                                <a href="{{ route('product') }}">
+                                                <a href="#">
                                                     <img src="assets/images/products/product-4.jpg" alt="Product image" class="product-image">
                                                 </a>
                                             </figure><!-- End .product-media -->

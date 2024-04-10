@@ -19,14 +19,14 @@ class Merchant extends Model
         'location',
     ];
 
-    
 
-    public function getMerchantByUserID(BigInteger $id): Merchant
+
+    public function getMerchantByUserID(int $id): Merchant
     {
         return Merchant::where('user_id', $id)->first();
     }
 
-    public function getMerchantByID(BigInteger $id): Merchant
+    public function getMerchantByID(int $id): Merchant
     {
         return Merchant::where('id', $id)->first();
     }

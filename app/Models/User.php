@@ -26,7 +26,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function getUserByID(BigInteger $id): User
+    public function getUserByID(int  $id): User
     {
         return User::where('id', $id)->first();
     }
@@ -36,8 +36,8 @@ class User extends Authenticatable
         return User::create($user);
     }
 
-    public function updateUser(array $user): bool
+    public function updateUser(User $user): bool
     {
-        return User::where('id', $user['id'])->update($user);
+        return $user->save();
     }
 }

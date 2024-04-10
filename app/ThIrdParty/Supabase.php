@@ -41,8 +41,8 @@ class Supabase
     {
         $filepath = $file->getClientOriginalName();
         $response = Http::withHeaders(['Authorization' => 'Bearer ' . $this->apiKey,])->post("{$this->supabaseUrl}/storage/v1/object/sign/{$this->bucketName}/{$filepath}", [
-                'Content-Type' => $file->getClientMimeType(),
-            ]);
+            "expiresIn" => 999 * SECONDS_IN_DAY,
+        ]);
 
 
         if ($response->successful()) {

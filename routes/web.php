@@ -19,12 +19,18 @@ Route::get('/wishlist', [UserController::class, 'wishlist'])->name('wishlist');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
 Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 
-Route::get('/product', [ProductController::class, 'product'])->name('product');
-Route::get('/products', [ProductController::class, 'products'])->name('products');
+Route::get('/product/{id}', [ProductController::class, 'getProductByID'])->name('get-product-by-id');
+Route::get('/product', [ProductController::class, 'getAllProduct'])->name('get-all-product');
 Route::post('/product', [ProductController::class, 'createProduct'])->name('create-product');
+Route::patch('/product/{id}', [ProductController::class, 'updateProduct'])->name('update-product');
+Route::delete('/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete-product');
+
 
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
 Route::post('/auth/register', [AuthController::class, 'userRegister']);
 Route::post('/auth/signin', [AuthController::class, 'userSignin']);
 Route::get('/auth/signout', [AuthController::class, 'userSignout'])->name('signout');
 
+Route::get('/testing', function(){
+    return view('testing');
+})->name('testing');

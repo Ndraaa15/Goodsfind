@@ -56,16 +56,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('new-password'));
         }
 
-
-        $updateData = [
-            'id' => $user->id,
-            'name' => $user->name,
-            'display_name' => $user->display_name,
-            'email' => $user->email,
-            'password' => $user->password,
-        ];
-
-        $userModel->updateUser($updateData);
+        $userModel->updateUser($user);
 
         return view('dashboard', [
             'user' => $user,

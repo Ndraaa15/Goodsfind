@@ -34,22 +34,22 @@ class Product extends Model
         return Product::create($product);
     }
 
-    public function updateProduct(array $product): bool
+    public function updateProduct(Product $product): bool
     {
-        return Product::where('id', $product['id'])->update($product);
+        return $product->save();
     }
 
-    public function deleteProduct(BigInteger $id): bool
+    public function deleteProduct(int $id): bool
     {
         return Product::where('id', $id)->delete();
     }
 
-    public function getProducts(): array
+    public function getAllProduct(): array
     {
         return Product::all()->toArray();
     }
 
-    public function getProductByID(BigInteger $id): Product
+    public function getProductByID(int $id): Product
     {
         return Product::where('id', $id)->first();
     }
