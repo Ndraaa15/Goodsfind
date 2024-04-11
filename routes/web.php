@@ -6,10 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
-
-
-
-
+use App\Http\Controllers\PaymentController;
+use App\Models\Payment;
 
 Route::view('/', 'homepage')->name('homepage');
 Route::view('/about', 'about')->name('about');
@@ -37,7 +35,9 @@ Route::post('/cart/{product_id}', [CartController::class, 'addCartItem'])->name(
 Route::get('/cart', [CartController::class, 'getCart'])->name('get-cart');
 Route::delete('/cart/{product_id}', [CartController::class, 'deleteCartItem'])->name('delete-cart-item');
 
+Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
 
+Route::get('/login', [AuthController::class, 'auth'])->name('login');
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
 Route::post('/auth/register', [AuthController::class, 'userRegister']);
 Route::post('/auth/signin', [AuthController::class, 'userSignin']);

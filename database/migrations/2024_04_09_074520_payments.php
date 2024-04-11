@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
             $table->decimal('shipping_price');
             $table->string('shipping_type');
             $table->decimal('service_price');
             $table->decimal('total_payment');
-            $table->string('status_payment');
+            $table->string('status_payment')->default('unpaid');
+            $table->string('payment_type');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

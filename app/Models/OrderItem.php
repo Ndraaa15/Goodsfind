@@ -13,6 +13,8 @@ class OrderItem extends Model
         'order_id',
         'product_id',
         'quantity',
+        'price',
+        'total_price_product',
     ];
 
     public function addOrderItem(array $order_item)

@@ -15,6 +15,7 @@ class CartSeeder extends Seeder
         $cart = [
             'id' => 1,
             'user_id' => 1,
+            'total_price' => 800,
         ];
 
         \App\Models\Cart::create($cart);

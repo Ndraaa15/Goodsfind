@@ -26,6 +26,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function orders()
+    {
+        return User::hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function payments()
+    {
+        return User::hasMany(Payment::class, 'user_id', 'id');
+    }
+
     public function getUserByID(int  $id): User
     {
         return User::where('id', $id)->first();

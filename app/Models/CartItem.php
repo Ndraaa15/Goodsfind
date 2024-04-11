@@ -16,7 +16,7 @@ class CartItem extends Model
         'total_price_product',
     ];
 
-    public $primaryKey = ['cart_id', 'product_id'];
+    protected $primaryKey = ['cart_id', 'product_id'];
     public $incrementing = false;
 
     public function cart()
@@ -52,6 +52,12 @@ class CartItem extends Model
     {
         return CartItem::where('product_id', $product_id)
         ->where('cart_id', $cart_id)
+        ->delete();
+    }
+
+    public function deleteAllCartItem(int $cart_id): bool
+    {
+        return CartItem::where('cart_id', $cart_id)
         ->delete();
     }
 }

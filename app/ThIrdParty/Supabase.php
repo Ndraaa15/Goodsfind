@@ -16,9 +16,9 @@ class Supabase
 
     public function __construct()
     {
-        $this->supabaseUrl = "https://arcudskzafkijqukfool.supabase.co";
-        $this->apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY3Vkc2t6YWZraWpxdWtmb29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc2NDk3MjksImV4cCI6MTk5MzIyNTcyOX0.CjOVpoFAdq3U-AeAzsuyV6IGcqx2ZnaXjneTis5qd6w";
-        $this->bucketName = "Goodsvind";
+        $this->supabaseUrl = env('SUPABASE_URL');
+        $this->apiKey = env('SUPABASE_API_KEY');
+        $this->bucketName = env('SUPABASE_BUCKET_NAME');
     }
 
     public function uploadImage($file)
