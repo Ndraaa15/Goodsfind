@@ -24,6 +24,9 @@ return new class extends Migration
             $table->decimal('discount');
             $table->integer('time_usage');
             $table->boolean('is_promotion');
+            $table->integer('rating')->default(0);
+            $table->integer('total_review')->default(0);
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
         });

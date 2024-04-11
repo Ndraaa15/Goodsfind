@@ -12,12 +12,28 @@ class Review extends Model
     protected $fillable = [
         'product_id',
         'user_id',
+        'review',
+        'sub_review',
         'rating',
-        'comment',
     ];
 
-    public function addReview(array $review)
+    public function createReview(array $review)
     {
-        return $this->create($review);
+        return Review::create($review);
+    }
+
+    public function getReviewByProductId($product_id)
+    {
+        return Review::where('product_id', $product_id)->get()->toArray();
+    }
+
+    public function getReviewByReviewID($review_id)
+    {
+        return Review::where('id', $review_id)->first();
+    }
+
+    public function deleteReview($review_id)
+    {
+        return Review::where('id', $review_id)->delete();
     }
 }

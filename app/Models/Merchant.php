@@ -19,20 +19,25 @@ class Merchant extends Model
         'location',
     ];
 
-
-
-    public function getMerchantByUserID(int $id): Merchant
+    public function user()
     {
-        return Merchant::where('user_id', $id)->first();
-    }
-
-    public function getMerchantByID(int $id): Merchant
-    {
-        return Merchant::where('id', $id)->first();
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function createMerchant(array $merchant): Merchant
     {
         return Merchant::create($merchant);
+    }
+
+    public function getMerchantByUserID(int $id): Merchant
+    {
+        return Merchant::where('user_id', $id)
+        ->first();
+    }
+
+    public function getMerchantByID(int $id): Merchant
+    {
+        return Merchant::where('id', $id)
+        ->first();
     }
 }

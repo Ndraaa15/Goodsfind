@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Merchant;
+use App\Models\Cart;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,7 +25,7 @@ class AuthController extends Controller
 
         $userModel = new User();
         $merchantModel = new Merchant();
-        $request->input('register-name');
+        $cartModel = new Cart();
 
         $createdUser = $userModel->createUser([
             'name' => $request->input('register-name'),
@@ -33,6 +35,10 @@ class AuthController extends Controller
         ]);
 
         $merchantModel->createMerchant([
+            'user_id' => $createdUser->id,
+        ]);
+
+        $cartModel->createCart([
             'user_id' => $createdUser->id,
         ]);
 

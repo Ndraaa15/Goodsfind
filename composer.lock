@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc988501b10afbbcc9a565db47aa7499",
+    "content-hash": "6dcd68054e550e6699de94a8a8120aa5",
     "packages": [
         {
             "name": "brick/math",
@@ -1825,6 +1825,61 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "midtrans/midtrans-php",
+            "version": "2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Midtrans/midtrans-php.git",
+                "reference": "a1ad0c824449ca8c68c4cf11b3417ad518311d2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Midtrans/midtrans-php/zipball/a1ad0c824449ca8c68c4cf11b3417ad518311d2b",
+                "reference": "a1ad0c824449ca8c68c4cf11b3417ad518311d2b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.7.*",
+                "psy/psysh": "0.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Midtrans\\": "Midtrans/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andri Setiawan",
+                    "email": "andri.setiawan@veritrans.co.id"
+                },
+                {
+                    "name": "Alvin Litani",
+                    "email": "alvin.litani@veritrans.co.id"
+                },
+                {
+                    "name": "Ismail Faruqi",
+                    "email": "ismail.faruqi@veritrans.co.id"
+                }
+            ],
+            "description": "PHP Wrapper for Midtrans Payment API.",
+            "homepage": "https://midtrans.com",
+            "support": {
+                "issues": "https://github.com/Midtrans/midtrans-php/issues",
+                "source": "https://github.com/Midtrans/midtrans-php/tree/2.5.2"
+            },
+            "time": "2021-08-23T08:52:05+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5413,6 +5468,53 @@
                 }
             ],
             "time": "2024-02-15T11:33:06+00:00"
+        },
+        {
+            "name": "thiagoprz/eloquent-composite-key",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagoprz/eloquent-composite-key.git",
+                "reference": "43012fa195db8517a5344355aa83cd39aaa466aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagoprz/eloquent-composite-key/zipball/43012fa195db8517a5344355aa83cd39aaa466aa",
+                "reference": "43012fa195db8517a5344355aa83cd39aaa466aa",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0 || ^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "6",
+                "squizlabs/php_codesniffer": "4.0.x-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thiagoprz\\CompositeKey\\": "src"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Przyczynski",
+                    "email": "przyczynski@gmail.com"
+                }
+            ],
+            "description": "Eloquent Composite Key Support Package",
+            "support": {
+                "issues": "https://github.com/thiagoprz/eloquent-composite-key/issues",
+                "source": "https://github.com/thiagoprz/eloquent-composite-key/tree/1.0.1"
+            },
+            "time": "2022-04-20T19:12:31+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

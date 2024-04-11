@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CartController;
+
+
 
 
 
@@ -17,13 +21,21 @@ Route::view('/blog', 'blog')->name('blog');
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 Route::get('/wishlist', [UserController::class, 'wishlist'])->name('wishlist');
 Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
-Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+// Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 
 Route::get('/product/{id}', [ProductController::class, 'getProductByID'])->name('get-product-by-id');
 Route::get('/product', [ProductController::class, 'getAllProduct'])->name('get-all-product');
 Route::post('/product', [ProductController::class, 'createProduct'])->name('create-product');
 Route::patch('/product/{id}', [ProductController::class, 'updateProduct'])->name('update-product');
 Route::delete('/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete-product');
+
+Route::post('/review/{product_id}', [ReviewController::class, 'addReview'])->name('add-review');
+Route::get('/review/{product_id}', [ReviewController::class, 'getReview'])->name('get-review');
+Route::delete('/review/{review_id}', [ReviewController::class, 'deleteReview'])->name('delete-review');
+
+Route::post('/cart/{product_id}', [CartController::class, 'addCartItem'])->name('add-cart-item');
+Route::get('/cart', [CartController::class, 'getCart'])->name('get-cart');
+Route::delete('/cart/{product_id}', [CartController::class, 'deleteCartItem'])->name('delete-cart-item');
 
 
 Route::get('/auth', [AuthController::class, 'auth'])->name('auth');
