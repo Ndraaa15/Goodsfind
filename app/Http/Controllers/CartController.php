@@ -9,6 +9,12 @@ use App\Models\CartItem;
 
 class CartController extends Controller
 {
+
+    public function cart()
+    {
+        return view('cart');
+    }
+
     public function addCartItem(Request $request, int $product_id)
     {
         $cartModel = new Cart();

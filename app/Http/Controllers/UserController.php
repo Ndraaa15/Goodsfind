@@ -16,22 +16,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function wishlist()
-    {
-        return view('wishlist');
-    }
-
-    public function checkout()
-    {
-        return view('checkout');
-    }
-
-    public function cart()
-    {
-        return view('cart');
-    }
-
-    public function update_profile(Request $request)
+    public function updateUser(Request $request)
     {
         if (!auth()->check()) {
             return redirect()->route('auth')->with('error', 'You must be logged in to update your profile.');

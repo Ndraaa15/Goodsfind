@@ -6,6 +6,10 @@ use App\Models\Wishlist;
 
 class WishlistController extends Controller
 {
+    public function wishlist()
+    {
+        return view('wishlist');
+    }
     public function addWishlist(int $product_id)
     {
         $wishlist = new Wishlist();

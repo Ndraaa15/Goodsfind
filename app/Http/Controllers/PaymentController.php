@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
+
+    public function checkoutPage()
+    {
+        return view('checkout');
+    }
+
     public function checkout(Request $request)
     {
         $paymentModel = new Payment();
