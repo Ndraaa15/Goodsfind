@@ -25,31 +25,49 @@ class Product extends Model
         'is_promotion',
     ];
 
-    protected $casts = [
-        'condition' => ProductCondition::class,
-    ];
+    protected function casts():array
+    {
+        return [
+            'condition' => ProductCondition::class,
+        ];
+    }
 
-    public function createProduct(array $product): Product
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class, 'merchant_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product_id', 'id');
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class, 'product_id', 'id');
+    }
+
+    public function create_product(array $product): Product
     {
         return Product::create($product);
     }
 
-    public function updateProduct(Product $product): bool
+    public function update_product(Product $product): bool
     {
         return $product->save();
     }
 
-    public function deleteProduct(int $id): bool
+    public function delete_product(int $id): bool
     {
         return Product::where('id', $id)->delete();
     }
 
-    public function getAllProduct(): array
+    public function get_all_product(): array
     {
         return Product::all()->toArray();
     }
 
-    public function getProductByID(int $id): Product
+    public function get_product_by_id(int $id): Product
     {
         return Product::where('id', $id)->first();
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('shipping_type');
             $table->decimal('service_price');
             $table->decimal('total_payment');
-            $table->string('status_payment')->default('unpaid');
+            $table->string('status_payment')->default('pending');
             $table->string('payment_type');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

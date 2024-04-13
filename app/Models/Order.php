@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\StatusOrder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,15 @@ class Order extends Model
         'order_code',
         'user_id',
         'total_price',
+        'status_order',
     ];
+
+    protected function casts():array
+    {
+        return [
+            'condition' => StatusOrder::class,
+        ];
+    }
 
     public function user()
     {
@@ -25,7 +34,7 @@ class Order extends Model
         return Order::belongsTo(Payment::class);
     }
 
-    public function addOrder(array $order)
+    public function create_order(array $order)
     {
         return Order::create($order);
     }

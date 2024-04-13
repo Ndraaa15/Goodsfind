@@ -36,17 +36,27 @@ class User extends Authenticatable
         return User::hasMany(Payment::class, 'user_id', 'id');
     }
 
-    public function getUserByID(int  $id): User
+    public function reviews()
+    {
+        return User::hasMany(Review::class, 'user_id', 'id');
+    }
+
+    public function wishlists()
+    {
+        return User::hasMany(Wishlist::class, 'user_id', 'id');
+    }
+
+    public function get_user_by_id(int  $id): User
     {
         return User::where('id', $id)->first();
     }
 
-    public function createUser(array $user): User
+    public function create_user(array $user): User
     {
         return User::create($user);
     }
 
-    public function updateUser(User $user): bool
+    public function update_user(User $user): bool
     {
         return $user->save();
     }

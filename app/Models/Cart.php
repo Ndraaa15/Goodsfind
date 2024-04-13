@@ -24,17 +24,18 @@ class Cart extends Model
         return Cart::belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function createCart(array $cart): Cart
+    public function create_cart(array $cart): Cart
     {
         return Cart::create($cart);
     }
 
-    public function getCartByUserID(int $user_id): Cart
+    public function get_cart_by_user_id(int $user_id): Cart
     {
-        return Cart::where('user_id', $user_id)->first();
+        return Cart::where('user_id', $user_id)
+        ->first();
     }
 
-    public function updateTotalPrice()
+    public function update_total_price()
     {
         $cartItems = $this->cart_items;
         $totalPrice = $cartItems->sum(function ($item) {

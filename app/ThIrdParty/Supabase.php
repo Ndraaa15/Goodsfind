@@ -21,14 +21,11 @@ class Supabase
         $this->bucketName = env('SUPABASE_BUCKET_NAME');
     }
 
-    public function uploadImage($file)
+    public function upload_image($file, $fileName)
     {
-        Log::info("uploading file to supabase: {$file}");
-        $filepath = $file->getClientOriginalName();
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey,
-        ])->attach('file', $file->get(), $file->getClientOriginalName())->post("{$this->supabaseUrl}/storage/v1/object/{$this->bucketName}/{$filepath}");
+        ])->attach('file', $file->get(), $fileName)->post("{$this->supabaseUrl}/storage/v1/object/{$this->bucketName}/{$fileName}");
 
         if ($response->successful()) {
             return $response->json();
@@ -37,18 +34,16 @@ class Supabase
         }
     }
 
-    public function getSignedUrl($file)
+    public function get_signed_url($fileName)
     {
-        $filepath = $file->getClientOriginalName();
-        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $this->apiKey,])->post("{$this->supabaseUrl}/storage/v1/object/sign/{$this->bucketName}/{$filepath}", [
-            "expiresIn" => 999 * SECONDS_IN_DAY,
+        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $this->apiKey,])->post("{$this->supabaseUrl}/storage/v1/object/sign/{$this->bucketName}/{$fileName}", [
+            "expiresIn" => 100 * SECONDS_IN_DAY,
         ]);
 
 
         if ($response->successful()) {
             return $this->supabaseUrl . "/storage/v1" . $response->json()['signedURL'];
         } else {
-            // Handle the case where the request was not successful
             throw new \Exception('Failed to retrieve signed URL from Supabase: ' . $response->body());
         }
     }

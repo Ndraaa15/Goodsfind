@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
@@ -10,22 +11,46 @@ class WishlistController extends Controller
     {
         return view('wishlist');
     }
-    public function addWishlist(int $product_id)
-    {
-        $wishlist = new Wishlist();
-        $wishlist->addWishlist([
-            'product_id' => $product_id,
-            'user_id' => auth()->user()->id,
-        ]);
 
-        return redirect()->route('product', ['id' => $product_id]);
+    public function add_wishlist(int $product_id)
+    {
+        try{
+            DB::beginTransaction();
+            $wishlistModel = new Wishlist();
+            $wishlist = $wishlistModel->create_wishlist([
+                'product_id' => $product_id,
+                'user_id' => auth()->user()->id,
+            ]);
+            DB::commit();
+            $wishlistWithProduct = $wishlist->load('product');
+            dd($wishlistWithProduct);
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
+        }
     }
 
-    public function deleteWishlist(int $product_id)
+    public function delete_wishlist(int $product_id)
     {
-        $wishlist = new Wishlist();
-        $wishlist->deleteWishlist($product_id, auth()->user()->id);
+        try{
+            DB::beginTransaction();
+            $wishlistModel = new Wishlist();
+            $wishlistModel->delete_wishlist($product_id, auth()->user()->id);
+            DB::commit();
+            dd('Wishlist deleted!');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
+        }
+    }
 
-        return redirect()->route('product', ['id' => $product_id]);
+    public function get_wishlist()
+    {
+        $wishlistModel = new Wishlist();
+        $wishlists = $wishlistModel->get_wishlist(auth()->user()->id);
+        $wishlistsWithProduct = $wishlists->load('product');
+        dd($wishlistsWithProduct);
     }
 }

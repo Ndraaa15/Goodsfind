@@ -27,7 +27,7 @@ class ShippingAddress extends Model
         return $this->belongsTo(Payment::class);
     }
 
-    public function createShippingAddress(array $shippingAddress): ShippingAddress
+    public function create_shipping_address(array $shippingAddress): ShippingAddress
     {
         return ShippingAddress::create($shippingAddress);
     }

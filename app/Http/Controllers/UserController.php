@@ -16,35 +16,29 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateUser(Request $request)
+    public function update_user(Request $request)
     {
-        if (!auth()->check()) {
-            return redirect()->route('auth')->with('error', 'You must be logged in to update your profile.');
-        }
-
         $userModel = new User();
-        $user = $userModel->getUserByID(auth()->user()->id);
+        $user = $userModel->get_user_by_id(auth()->user()->id);
 
-        if(!empty($request->input(('name')))){
+        if (!empty($request->input(('name')))) {
             $user->name = $request->input('name');
         }
 
-        if(!empty($request->input(('display-name')))){
+        if (!empty($request->input(('display-name')))) {
             $user->display_name = $request->input('display-name');
         }
 
-        if(!empty($request->input(('email')))){
+        if (!empty($request->input(('email')))) {
             $user->email = $request->input('email');
         }
 
-        if($request->input('new-password') === $request->input('confirm-password') && !empty($request->input('new-password')) && !empty($request->input('confirm-password'))){
+        if ($request->input('new-password') === $request->input('confirm-password') && !empty($request->input('new-password')) && !empty($request->input('confirm-password'))) {
             $user->password = Hash::make($request->input('new-password'));
         }
 
-        $userModel->updateUser($user);
-
-        return view('dashboard', [
-            'user' => $user,
-        ]);
+        $userModel->update_user($user);
+        $user->makeHidden(['password', 'remember_token']);
+        dd($user);
     }
 }

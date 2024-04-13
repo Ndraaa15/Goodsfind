@@ -24,20 +24,25 @@ class Merchant extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function createMerchant(array $merchant): Merchant
+    public function create_merchant(array $merchant): Merchant
     {
         return Merchant::create($merchant);
     }
 
-    public function getMerchantByUserID(int $id): Merchant
+    public function get_merchant_by_user_id(int $id): Merchant
     {
         return Merchant::where('user_id', $id)
         ->first();
     }
 
-    public function getMerchantByID(int $id): Merchant
+    public function get_merchant_by_id(int $id): Merchant
     {
         return Merchant::where('id', $id)
         ->first();
+    }
+
+    public function update_merchant(Merchant $merchant): bool
+    {
+        return $merchant->save();
     }
 }

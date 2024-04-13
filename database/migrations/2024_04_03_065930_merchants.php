@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('account_number')->unique()->default('');
             $table->string('bank_name')->default('');
             $table->string('location')->default('');
+            $table->decimal('balance')->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

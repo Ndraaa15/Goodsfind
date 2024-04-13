@@ -17,7 +17,7 @@ class OrderItem extends Model
         'total_price_product',
     ];
 
-    public function addOrderItem(array $order_item)
+    public function create_order_item(array $order_item)
     {
         return $this->create($order_item);
     }

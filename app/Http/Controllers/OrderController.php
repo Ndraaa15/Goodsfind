@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\StatusOrder;
 
 class OrderController extends Controller
 {
-    public function addOrder(Request $request)
+    public function update_status_order(Request $request, int $order_id)
     {
-        $order = new Order();
-        $order->addOrder([
-            'product_id' => $request->input('product_id'),
-            'user_id' => auth()->user()->id,
-            'quantity' => $request->input('quantity'),
-            'total' => $request->input('total'),
+        $orderModel = new Order();
+        $order = $orderModel->get_order_by_id($order_id);
+
+        $request->validate([
+            'status_order' => StatusOrder::class,
         ]);
 
-        return redirect()->route('product', ['id' => $request->input('product_id')]);
+        $order->status_order = $request->input('status-order');
+        $orderModel->update_order($order);
+        dd('Order deleted!');
     }
 }
