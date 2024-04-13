@@ -25,7 +25,7 @@ class Product extends Model
         'is_promotion',
     ];
 
-    protected function casts():array
+    protected function casts(): array
     {
         return [
             'condition' => ProductCondition::class,
@@ -62,13 +62,41 @@ class Product extends Model
         return Product::where('id', $id)->delete();
     }
 
-    public function get_all_product(): array
+    public function get_all_product(array $filter)
     {
-        return Product::all()->toArray();
+        $products = Product::query()->with('merchant');
+
+        if (!empty($filter['category'])) {
+            $products->where('category', $filter['category']);
+        }
+
+        if (!empty($filter['condition'])) {
+            $products->where('condition', $filter['condition']);
+        }
+
+        if (!empty($filter['min_price']) && !empty($filter['max_price'])) {
+            $products->whereBetween('price', [$filter['min_price'], $filter['max_price']]);
+        }
+
+        if (!empty($filter['time_usage'])) {
+            $products->where('time_usage', '<=', $filter['time_usage']);
+        }
+
+        if (!empty($filter['location'])) {
+            $products->whereHas('merchant', function ($query) use ($filter) {
+                $query->where('location', $filter['location']);
+            });
+        }
+        return $products->get();
     }
 
     public function get_product_by_id(int $id): Product
     {
         return Product::where('id', $id)->first();
+    }
+
+    public function search_product(string $name)
+    {
+        return Product::where('name', 'like', '%' . $name . '%')->get();
     }
 }

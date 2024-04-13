@@ -67,19 +67,27 @@ class ProductController extends Controller
                 'is_promotion' => $request->input('is_promotion'),
             ]);
             DB::commit();
-            dd($product);
+            dd($product->load('merchant'));
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
         }
     }
 
-    public function get_all_product()
+    public function get_all_product(Request $request)
     {
-        $product = new Product();
-        $products = $product->get_all_product();
+        $filerProduct = [
+            'location' => $request->input('location'),
+            'price_min' => $request->input('priceMin'),
+            'price_max' => $request->input('priceMax'),
+            'condition' => $request->input('condition'),
+            'time_usage' => $request->input('timeUsage'),
+        ];
 
-        dd($products);
+        $product = new Product();
+        $products = $product->get_all_product($filerProduct);
+
+        dd($products->load('merchant'));
     }
 
 
@@ -88,7 +96,7 @@ class ProductController extends Controller
         $product = new Product();
         $product = $product->get_product_by_id($id);
 
-        dd($product);
+        dd($product->load('merchant'));
     }
 
     public function update_product(Request $request, int $id)
@@ -145,7 +153,7 @@ class ProductController extends Controller
 
             $productModel->update_product($product);
             DB::commit();
-            dd($product);
+            dd($product->load('merchant'));
         }
         catch (\Exception $e) {
             DB::rollBack();
@@ -159,5 +167,13 @@ class ProductController extends Controller
         $product->delete_product($id);
 
         dd('Product deleted');
+    }
+
+    public function search_product(Request $request)
+    {
+        $productModel = new Product();
+        $products = $productModel->search_product($request->query('search'));
+
+        dd($products->load('merchant'));
     }
 }

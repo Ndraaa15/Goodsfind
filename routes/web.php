@@ -29,10 +29,11 @@ Route::prefix('auth')->group(function () {
 // Merchant
 Route::prefix('merchant')->middleware('auth')->group(function () {
     Route::patch('/', [MerchantController::class, 'update_merchant'])->name('update-merchant');
-})->middleware(AuthMiddleware::class);
+});
 
 // Product
 Route::prefix('product')->middleware('auth')->group(function () {
+    Route::get('/search', [ProductController::class, 'search_product'])->name('search-product');
     Route::get('/{id}', [ProductController::class, 'get_product_by_id'])->name('get-product-by-id');
     Route::get('/', [ProductController::class, 'get_all_product'])->name('get-all-product');
     Route::post('/', [ProductController::class, 'create_product'])->name('create-product');
@@ -61,6 +62,7 @@ Route::prefix('review')->middleware('auth')->group(function () {
     Route::get('/{product_id}', [ReviewController::class, 'get_review'])->name('get-review');
     Route::patch('/{product_id}', [ReviewController::class, 'update_review'])->name('update-review');
     Route::delete('/{product_id}', [ReviewController::class, 'delete_review'])->name('delete-review');
+
 })->middleware(AuthMiddleware::class);
 
 // User
@@ -101,4 +103,6 @@ Route::group(['prefix' => 'testing'], function () {
     Route::view('update-merchant', 'testing.merchant.update-merchant')->name('testing-update-merchant');
 
     Route::view('checkout', 'testing.checkout.checkout')->name('testing-checkout');
+
+    Route::view('first-time-message', 'testing.message.first-time-message')->name('testing-first-time-message');
 });
