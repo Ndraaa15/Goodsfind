@@ -31,6 +31,7 @@ Route::prefix('auth')->group(function () {
 // Merchant
 Route::prefix('merchant')->middleware('auth')->group(function () {
     Route::patch('/', [MerchantController::class, 'update_merchant'])->name('update-merchant');
+    Route::post('/withdraw', [MerchantController::class, 'withdraw'])->name('withdraw');
     Route::get('/', [MerchantController::class, 'get_merchant'])->name('merchant');
 });
 

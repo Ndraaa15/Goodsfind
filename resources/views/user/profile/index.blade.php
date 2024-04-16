@@ -22,9 +22,6 @@
                                 <a class="nav-link" id="tab-payments-link" data-toggle="tab" href="#tab-payments" role="tab" aria-controls="tab-payments" aria-selected="false">Payments</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-wallet" role="tab" aria-controls="tab-address" aria-selected="false">Wallet</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
                             <li class="nav-item">
@@ -131,17 +128,6 @@
                                     </table>
                                 </div>
                                 @endif
-                            </div>
-                            <div class="tab-pane fade" id="tab-wallet" role="tabpanel" aria-labelledby="tab-orders-link">
-                                <div class="card card-dashboard">
-                                    <div class="card-body">
-                                        <h3 class="card-title">E-Wallet</h3>
-                                        <button type="button" href="#" class="btn btn-outline-primary-2">
-                                            <span>Withdraw</span>
-                                            <i class="icon-dollar"></i>
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                             <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                 <form action="{{ route('update-user') }}" method="POST">

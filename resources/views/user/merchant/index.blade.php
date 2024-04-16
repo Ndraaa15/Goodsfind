@@ -1,10 +1,19 @@
 @extends('layout.app')
 @section('content')
 <main class="main">
-    <div class="page-header text-center mb-2" style="background-image: url({{asset('assets/images/page-header-bg.jpg')}})">
-        <div class="container">
-            <h1 class="page-title">Merchant</h1>
-            <p>Balance : {{ $merchant->balance }}</p>
+    <div class="page-content">
+        <div class="container mt-3">
+            <div class="banner">
+                <a href="#">
+                    <img src="assets/images/banner-1.jpg" alt="Banner" style="max-height: 200px;">
+                </a>
+                <div class="banner-content">
+                    <h4 class="banner-subtitle">Merchant</h4>
+                    <h3 class="banner-title">Your balance <br>{{ $merchant->balance }}</h3>
+                    <a href="#edit-modal" data-toggle="modal" class="btn btn-outline-primary-2 banner-link">Edit</span></a>
+                    <a href="#withdraw-modal" data-toggle="modal" class="btn btn-outline-primary-2 banner-link">Withdraw</span></a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="page-content">
@@ -143,4 +152,6 @@
 @include('user.merchant.form')
 @include('user.merchant.check')
 @include('user.merchant.update')
+@include('user.merchant.withdraw')
+@include('user.merchant.edit')
 @endsection

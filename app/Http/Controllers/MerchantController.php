@@ -49,7 +49,7 @@ class MerchantController extends Controller
 
             $merchantModel->update_merchant($merchant);
             DB::commit();
-            redirect()->route('merchant');
+            return redirect()->route('merchant');
         }
         catch (\Exception $e) {
             DB::rollBack();
@@ -73,7 +73,7 @@ class MerchantController extends Controller
             $merchant->balance = $merchant->balance - $request->input('amount');
             $merchantModel->update_merchant($merchant);
             DB::commit();
-            redirect()->route('merchant');
+            return redirect()->route('merchant');
         }
         catch (\Exception $e) {
             DB::rollBack();
