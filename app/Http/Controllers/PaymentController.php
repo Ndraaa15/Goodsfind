@@ -9,7 +9,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
-use App\Models\Merchant;
 use App\Models\Product;
 use App\ThirdParty\Midtrans;
 use Illuminate\Support\Facades\DB;

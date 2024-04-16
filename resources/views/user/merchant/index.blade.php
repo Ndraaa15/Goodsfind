@@ -51,7 +51,7 @@
                                 @endif
                         </td>
                         <td class="action-col">
-                            <button href="#merchant-modal" data-toggle="modal" class="btn btn-outline btn-edit" data-product="{{ $product }}" >
+                            <button href="#merchant-modal" data-toggle="modal" class="btn btn-outline btn-edit" data-product="{{ $product }}">
                                 Edit
                             </button>
                         </td>

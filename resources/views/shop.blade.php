@@ -33,7 +33,6 @@
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('add-to-cart-form-{{$product->id}}').submit();" class="btn-product btn-cart"><span>add to cart</span></a>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="product-body product-action-inner">
                                         <a href="#" class="btn-product btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>

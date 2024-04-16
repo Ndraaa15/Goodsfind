@@ -7,8 +7,7 @@
                         <h2 class="banner-title">{{$news['Title']}}</h2>
                         <p>{{$news['Desc']}}</p>
                         @if($news['Target'] != null)
-                            <a href="{{$news['Target']}}" class="btn btn-primary btn-rounded"><span>Click Here</span><i
-                                    class="icon-long-arrow-right"></i></a>
+                        <a href="{{$news['Target']}}" class="btn btn-primary btn-rounded"><span>Click Here</span><i class="icon-long-arrow-right"></i></a>
                         @endif
                     </div>
                 </div>
