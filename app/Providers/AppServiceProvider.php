@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -47,18 +48,6 @@ class AppServiceProvider extends ServiceProvider
         ];
     }
 
-    public function getPromoting(): array
-    {
-        return [
-            $this->getProduct(),
-            $this->getProduct(),
-            $this->getProduct(),
-            $this->getProduct(),
-            $this->getProduct()
-        ];
-    }
-
-
     public function getProduct()
     {
         if (Schema::hasTable('products')) {
@@ -66,6 +55,15 @@ class AppServiceProvider extends ServiceProvider
             return  $productModel->get_all_product([
                 'is_promotion' => 1
             ]);
+        }
+        return [];
+    }
+
+    public function getReviews()
+    {
+        if (Schema::hasTable('reviews')) {
+            $reviewModel = new Review();
+            return  $reviewModel->get_all_review();
         }
         return [];
     }
@@ -78,5 +76,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('news', $this->getNews());
         View::share('slide', $this->getSlide());
         View::share('products', $this->getProduct());
+        View::share('reviews', $this->getReviews());
     }
 }

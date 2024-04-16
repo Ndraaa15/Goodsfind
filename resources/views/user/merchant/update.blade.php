@@ -13,42 +13,61 @@
                                 @method('PATCH')
                                 <div class="form-group">
                                     <label>Image</label>
-                                    <input type="file" class="form-control-file" name="image">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="id" id="product-id" hidden>
+                                    <input type="file" class="form-control" name="image" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="name" id="product-name" required>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" class="form-control" name="description" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="text" class="form-control" name="price" id="product-price" required>
+                                    <input type="number" class="form-control" name="price" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <input type="text" class="form-control" name="category" id="product-category" required>
+                                    <select id="category-dropdown" class="form-control" name="category">
+                                        <option value="">Select a category</option>
+                                        <option value="1">Electronics</option>
+                                        <option value="2">Clothing</option>
+                                        <option value="3">Books</option>
+                                        <option value="4">Home & Garden</option>
+                                        <option value="5">Health & Beauty</option>
+                                        <option value="6">Toys & Games</option>
+                                        <option value="7">Sports & Outdoors</option>
+                                        <option value="8">Automotive</option>
+                                        <option value="9">Music</option>
+                                        <option value="10">Movies & TV</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Condition</label>
-                                    <input type="text" class="form-control" name="condition" id="product-condition" required>
+                                    <select id="category-dropdown" class="form-control" name="condition">
+                                        <option value="">Select a category</option>
+                                        <option value="Very Good">Very Good</option>
+                                        <option value="Good">Good</option>
+                                        <option value="Bad">Bad</option>
+                                        <option value="Very Bad">Very Bad</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Stock</label>
-                                    <input type="text" class="form-control" name="stock" id="product-stock" required>
+                                    <input type="number" class="form-control" name="stock" value="0" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Time usage</label>
-                                    <input type="text" class="form-control" name="time-usage" id="product-time-usage" required>
+                                    <label>Time Usage (Day)</label>
+                                    <input type="number" class="form-control" value="0" name="time-usage" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Discount</label>
-                                    <input type="text" class="form-control" name="Discount" id="product-discount" required>
+                                    <input type="number" class="form-control" name="discount" value="0" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Is Promotion</label>
-                                    <input type="radio" class="form-control" name="is_promotion" id="product-is-promotion">
+                                    <input type="checkbox" class="form-control" name="is-promotion" value="1"><br>
                                 </div>
                                 <div class="form-footer">
                                     <button type="submit" class="btn btn-outline-primary-2">

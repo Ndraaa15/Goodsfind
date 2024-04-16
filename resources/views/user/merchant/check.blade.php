@@ -8,7 +8,9 @@
                 <div class="form-box">
                     <div class="form-tab">
                         <div class="tab-content" id="tab-content-5">
-                            <form action="#">
+                            <form id="update-form" action="{{ route('update-status-order', ['order_item_id' => 'PRODUCT_ID'])}}" method="POST">
+                                @csrf
+                                @method('PATCH')
                                 <div class="form-group">
                                     <label for="shipping-address-name">Name</label>
                                     <input type="text" class="form-control" id="shipping-address-name" name="shipping-address-name" disabled>
@@ -18,19 +20,15 @@
                                     <input type="text" class="form-control" id="shipping-address" name="shipping-address" style="outline: none;content: 'Select some files';" disabled>
                                 </div>
                                 <div class="form-footer">
-                                    <form id="update-form" action="{{ route('order', ['id' => 'PRODUCT_ID'])}}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="status" id="order-status" value="">
-                                        <button type="button" class="btn btn-outline-primary-2 btn-accept" onclick="setOrderStatus('accept')">
-                                            <span>Accept</span>
-                                            <i class="icon-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-outline-primary-2 btn-reject" onclick="setOrderStatus('reject')">
-                                            <span>Reject</span>
-                                            <i class="icon-close"></i>
-                                        </button>
-                                    </form>
+                                    <input type="text" name="status-order" id="status-order" value="" hidden>
+                                    <button type="button" class="btn btn-outline-primary-2 btn-accept" onclick="setOrderStatus('Accepted')">
+                                        <span>Accept</span>
+                                        <i class="icon-check"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-reject" onclick="setOrderStatus('Rejected')">
+                                        <span>Reject</span>
+                                        <i class="icon-close"></i>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -42,8 +40,8 @@
 </div>
 
 <script>
-    function setStatus(status) {
-        $('#order-status').val(status);
+    function setOrderStatus(status) {
+        $('#status-order').val(status);
         $('#update-form').submit();
     }
 
@@ -52,13 +50,15 @@
             const button = $(event.relatedTarget);
             const name = button.data('shipping-address-name');
             const address = button.data('shipping-address');
+            const orderItemID = button.data('order-item-id');
 
             const modal = $(this);
             modal.find('#shipping-address-name').val(name);
             modal.find('#shipping-address').val(address);
 
             let formAction = $('#update-form').attr('action');
-            formAction = formAction.replace('PRODUCT_ID', data('data-order-item-id'));
+            formAction = formAction.replace('PRODUCT_ID', orderItemID);
+            console.log(formAction);
             $('#update-form').attr('action', formAction);
         });
     });

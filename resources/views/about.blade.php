@@ -92,6 +92,37 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container">
+            <h2 class="title text-center mb-3">
+                Our Review
+            </h2>
+            <!-- End .title text-center -->
+
+            <div class="owl-carousel owl-theme owl-testimonials" data-toggle="owl" data-owl-options='{
+    "nav": false,
+    "dots": true,
+    "margin": 20,
+    "loop": true,
+    "responsive": {
+        "1200": {
+            "nav": true
+        }
+    }
+}'>
+                @foreach ($reviews as $review)
+                <blockquote class="testimonial testimonial-icon text-center">
+                    <p>
+                        “ {{ $review->review }} ”
+                    </p>
+
+                    <cite>
+                        {{ $review->user->name }}
+                        <span>Customer</span>
+                    </cite>
+                </blockquote>
+                <!-- End .testimonial -->
+                @endforeach
+            </div>
+        </div>
 </main>
 @endsection

@@ -77,19 +77,12 @@ class ProductController extends Controller
             'category' => $request->input('category'),
         ];
 
-        $keyFilterProduct = json_encode($filerProduct);
-        $products = null;
-        if (Cache::has($keyFilterProduct)) {
-            $products = Cache::get($keyFilterProduct);
-        } else {
-            $productModel = new Product();
-            $products = $productModel->get_all_product($filerProduct);
-            Cache::put($keyFilterProduct, $products, 60);
-        }
+        $productModel = new Product();
+        $products = $productModel->get_all_product($filerProduct);
 
         return view(
             'shop',
-            ['products' => $products->load('merchant')->load('product_category')]
+            ['products' => $products]
         );
     }
 

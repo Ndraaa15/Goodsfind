@@ -28,6 +28,9 @@
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="tab-review-link" data-toggle="tab" href="#tab-review" role="tab" aria-controls="tab-review" aria-selected="false">Review</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('signout') }}">Sign Out</a>
                             </li>
                         </ul>
@@ -59,7 +62,6 @@
                                                 <th>Detail</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             @foreach($orders as $order)
                                             <tr>
@@ -88,7 +90,7 @@
                                 @endif
                             </div>
                             <div class="tab-pane fade" id="tab-payments" role="tabpanel" aria-labelledby="tab-payments-link">
-                                @if($orders->isEmpty())
+                                @if($orders === null)
                                 <p>No payments has been made yet.</p>
                                 <a href="/shop" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                                 @else
@@ -145,22 +147,40 @@
                                 <form action="{{ route('update-user') }}" method="POST">
                                     @csrf
                                     @method('PATCH')
+                                    <label>Name *</label>
+                                    <input type="text" class="form-control" placeholder="{{ $user->name }}" name="name">
                                     <label>Display Name *</label>
-                                    <input type="text" class="form-control" placeholder="{{ $user->display_name }}" required>
+                                    <input type="text" class="form-control" placeholder="{{ $user->display_name }}" name="display-name">
                                     <small class="form-text">This will be how your name will be displayed in the
                                         account section and in reviews</small>
                                     <label>Email address *</label>
-                                    <input type="email" class="form-control" placeholder="{{ $user->email }}" required>
+                                    <input type="email" class="form-control" placeholder="{{ $user->email }}" name="email">
                                     <label>Current password (leave blank to leave unchanged)</label>
                                     <input type="password" class="form-control" placeholder="●●●●●●●●●">
                                     <label>New password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="new-password">
                                     <label>Confirm new password</label>
-                                    <input type="password" class="form-control mb-2">
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        <span>SAVE CHANGES</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </button>
+                                    <input type="password" class="form-control mb-2" name="confirm-password">
+                                    <input type="submit" class="btn btn-outline-primary-2" value="Save">
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="tab-review" role="tabpanel" aria-labelledby="tab-review-link">
+                                @php
+                                $reviewText = "Add Review";
+                                $ratingVal = "Add Rating";
+                                if ($review !== null) {
+                                $reviewText = $review->review;
+                                $ratingVal = $review->rating;
+                                }
+                                @endphp
+                                <form action="{{ route('add-review') }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <label>Rating *</label>
+                                    <input type="number" class="form-control" placeholder="{{ $ratingVal }}" min="1" max="5" name="rating" required>
+                                    <label>Review *</label>
+                                    <input type="text" class="form-control" placeholder="{{ $reviewText }}" name="review" required>
+                                    <input type="submit" class="btn btn-outline-primary-2" value="Add Review">
                                 </form>
                             </div>
                         </div>

@@ -121,13 +121,13 @@
                         </td>
                         @elseif($orderItem->status_order == 'Accepted')
                         <td class="action-col">
-                            <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}">
+                            <button href="#" data-toggle="modal" class="btn btn-success" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}">
                                 Accepted
                             </button>
                         </td>
                         @elseif($orderItem->status_order == 'Rejected')
                         <td class="action-col">
-                            <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}>
+                            <button href="#" data-toggle="modal" class="btn btn-danger" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}">
                                 Rejected
                             </button>
                         </td>

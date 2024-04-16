@@ -14,6 +14,7 @@
                                         <th>Product</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="product-details-body"></tbody>
@@ -29,7 +30,6 @@
                                         <!-- Subtotal, service tax, shipping, and total will be dynamically added here -->
                                     </tbody>
                                 </table>
-                                <a class="btn btn-outline-danger btn-order btn-block">REJECTED</a>
                             </div>
                         </aside>
                     </div>
@@ -51,29 +51,28 @@
                     var productHTML = `
                 <td class="product-col">
                     <div class="product">
-                        <figure class="product-media">
-                            <a href="#">
-                                <img src="${orderItem.product.image || 'assets/images/slide-2.jpg'}" alt="Product image">
-                            </a>
-                        </figure>
                         <h3 class="product-title">
-                            <a href="#">${orderItem.product.name}</a>
+                            <a href="/product/${orderItem.product.id}">${orderItem.product.name}</a>
                         </h3>
                     </div>
-                </td>
-            `;
+                </td>`;
 
                     var quantityHTML = `
                 <td class="quantity-col">
                     ${orderItem.quantity}
-                </td>`
+                </td>`;
 
                     var totalPriceHTML = `
                 <td class="total-col">
                     Rp.${orderItem.price}
-                </td>
-            `;
-                    productDetailsHTML += `<tr>${productHTML}${quantityHTML}${totalPriceHTML}</tr>`;
+                </td>`;
+
+                    var statusHTML = `
+                <td class="total-col">
+                    ${orderItem.status_order}
+                </td>`;
+
+                    productDetailsHTML += `<tr>${productHTML}${quantityHTML}${totalPriceHTML}${statusHTML}</tr>`;
                 });
 
                 $('#product-details-body').html(productDetailsHTML);

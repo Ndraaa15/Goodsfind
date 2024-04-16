@@ -12,7 +12,8 @@
                     </div>
                 </div>
                 <div class="col-xl-2-5col col-lg-5 ">
-                    <img src="{{ $news['ImageUrl'] }}" class="newsletter-img" alt="newsletter">
+                    <!-- <img src="{{ $news['ImageUrl'] }}" class="newsletter-img" alt="newsletter"> -->
+                    <img src=" /assets/images/news.jpg" class="newsletter-img" alt="newsletter">
                 </div>
             </div>
         </div>

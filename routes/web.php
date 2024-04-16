@@ -9,6 +9,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\AuthMiddleware;
 
 Route::view('/', 'home')->name('home');
@@ -51,7 +52,7 @@ Route::prefix('cart')->middleware('auth')->group(function () {
 });
 
 Route::prefix('order')->middleware('auth')->group(function () {
-    Route::patch('/{order_item_id}', [CartController::class, 'update_status_order'])->name('update-status-order');
+    Route::patch('/{order_item_id}', [OrderController::class, 'update_status_order'])->name('update-status-order');
 });
 
 
@@ -63,10 +64,8 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
 
 // Review
 Route::prefix('review')->middleware('auth')->group(function () {
-    Route::post('/{product_id}', [ReviewController::class, 'add_review'])->name('add-review');
-    Route::get('/{product_id}', [ReviewController::class, 'get_review'])->name('get-review');
-    Route::patch('/{product_id}', [ReviewController::class, 'update_review'])->name('update-review');
-    Route::delete('/{product_id}', [ReviewController::class, 'delete_review'])->name('delete-review');
+    Route::post('/', [ReviewController::class, 'add_review'])->name('add-review');
+    Route::get('/', [ReviewController::class, 'get_all_review'])->name('get-review');
 });
 
 // User
@@ -109,4 +108,6 @@ Route::group(['prefix' => 'testing'], function () {
     Route::view('checkout', 'testing.checkout.checkout')->name('testing-checkout');
 
     Route::view('first-time-message', 'testing.message.first-time-message')->name('testing-first-time-message');
+
+    Route::view('update-status-order', 'testing.order.update-status-order')->name('testing-update-status-order');
 });

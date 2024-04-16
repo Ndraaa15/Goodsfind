@@ -74,7 +74,7 @@ class Product extends Model
 
     public function get_all_product(array $filter)
     {
-        $products = Product::query()->with('merchant');
+        $products = Product::query()->with('merchant')->with('product_category');
 
         if (!empty($filter['category'])) {
             $products->where('category_id', $filter['category']);
@@ -102,7 +102,7 @@ class Product extends Model
             $products->where('is_promotion', $filter['is(promotion)']);
         }
 
-        return $products->get();
+        return $products->paginate(5);
     }
 
     public function get_product_by_id(int $id): Product
