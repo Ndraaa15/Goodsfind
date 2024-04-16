@@ -53,7 +53,7 @@
                     </a>
                 </div>
                 <div class="wishlist">
-                    <a href="/wishlist" title="Wishlist">
+                    <a href="{{ route('wishlist') }}" title="Wishlist">
                         <div class="icon">
                             <i class="icon-heart-o"></i>
                             <span class="wishlist-count badge">{{$wishTotal}}</span>
@@ -63,7 +63,7 @@
                 </div>
                 @include('partials.cart')
                 <div class="wishlist">
-                    <a href="/user/profile" title="Wishlist">
+                    <a href="{{ route('profile') }}" title="Wishlist">
                         <div class="icon">
                             <i class="icon-user"></i>
                         </div>

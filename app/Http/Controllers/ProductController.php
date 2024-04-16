@@ -74,6 +74,7 @@ class ProductController extends Controller
             'price_max' => $request->input('priceMax'),
             'condition' => $request->input('condition'),
             'time_usage' => $request->input('timeUsage'),
+            'category' => $request->input('category'),
         ];
 
         $keyFilterProduct = json_encode($filerProduct);

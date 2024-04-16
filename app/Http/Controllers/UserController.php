@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $orderModel = new Order();
         $orders = $orderModel->get_order_by_user_id(auth()->user()->id);
-
+        // dd($orders);
         return view('user.profile.index', [
             'user' => auth()->user(),
             'orders' => $orders,

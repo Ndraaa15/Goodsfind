@@ -20,7 +20,7 @@ class OrderItemSeeder extends Seeder
                 'product_id' => 1,
                 'quantity' => 1,
                 'price' => 100,
-                'status_order' => 'pending',
+                'status_order' => 'Pending',
                 'total_price_product' => 100,
             ],
             [
@@ -29,7 +29,7 @@ class OrderItemSeeder extends Seeder
                 'product_id' => 2,
                 'quantity' => 2,
                 'price' => 200,
-                'status_order' => 'pending',
+                'status_order' => 'Pending',
                 'total_price_product' => 400,
             ],
             [
@@ -38,7 +38,7 @@ class OrderItemSeeder extends Seeder
                 'product_id' => 3,
                 'quantity' => 3,
                 'price' => 300,
-                'status_order' => 'pending',
+                'status_order' => 'Pending',
                 'total_price_product' => 900,
             ],
         ];

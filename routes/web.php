@@ -72,8 +72,8 @@ Route::prefix('review')->middleware('auth')->group(function () {
 // User
 Route::prefix('user')->middleware('auth')->group(function () {
     Route::patch('/', [UserController::class, 'update_user'])->name('update-user');
-    Route::get('/profile', [UserController::class, 'user_profile'])->name('profile');
 });
+Route::get('/profile', [UserController::class, 'user_profile'])->name('profile')->middleware('auth');
 
 // Wishlist
 Route::prefix('wishlist')->middleware('auth')->group(function () {

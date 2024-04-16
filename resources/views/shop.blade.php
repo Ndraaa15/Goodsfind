@@ -35,7 +35,11 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="product-body product-action-inner">
-                                        <a href="#" class="btn-product btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                                        <form id="add-wishlist-{{$product->id}}" action="{{ route('add-wishlist', ['product_id' => $product->id])}}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                        </form>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('add-wishlist-{{$product->id}}').submit();" class="btn-product btn-wishlist"><span>add to wishlist</span></a>
                                         <div class="product-cat">
                                             <a href="/product?category={{$product->product_category->id}}">{{$product->product_category->category}}</a>
                                         </div>
@@ -67,9 +71,8 @@
                                     <div class="filter-items filter-items-count">
                                         @foreach($categories as $category)
                                         <div class="filter-item">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="{{$category->id}}">
-                                                <label class="custom-control-label" for="{{$category->id}}">{{$category->category}}</label>
+                                            <div>
+                                                <label for="{{$category->id}}"><a href="/product?category={{$category->id}}"">{{$category->category}}</a></label>
                                             </div>
                                         </div>
                                         @endforeach

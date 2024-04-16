@@ -28,7 +28,7 @@
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sign Out</a>
+                                <a class="nav-link" href="{{ route('signout') }}">Sign Out</a>
                             </li>
                         </ul>
                     </aside>
@@ -59,8 +59,9 @@
                                                 <th>Detail</th>
                                             </tr>
                                         </thead>
-                                        @foreach($orders as $order)
+
                                         <tbody>
+                                            @foreach($orders as $order)
                                             <tr>
                                                 <td class="product-col">
                                                     <div class="product">
@@ -73,14 +74,15 @@
                                                     Rp{{$order->total_price}}
                                                 </td>
                                                 <td class="action-col">
-                                                    <button href="#detail-modal" data-toggle="modal" class="btn btn-outline-primary btn-edit" data-product-id="{{ $order->id }}">
+                                                    <button href="#detail-modal" data-toggle="modal" class="btn btn-outline-primary btn-edit" data-product-order="{{ $order }}">
                                                         >
                                                         Detail
                                                     </button>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
-                                        @endforeach
+
                                     </table>
                                 </div>
                                 @endif
@@ -99,8 +101,8 @@
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        @foreach($orders as $order)
                                         <tbody>
+                                            @foreach($orders as $order)
                                             <tr>
                                                 <td class="product-col">
                                                     <div class="product">
@@ -113,17 +115,17 @@
                                                     Rp{{$order->payment->total_payment}}
                                                 </td>
                                                 <td class="action-col">
-                                                    @if($order->payment->status_payment == 'Pending')
+                                                    @if($order->payment->status_payment === \App\StatusPayment::PENDING)
                                                     <span class="badge badge-warning">Pending</span>
-                                                    @elseif($order->payment->status == 'Paid')
+                                                    @elseif($order->payment->status_payment === \App\StatusPayment::PAID)
                                                     <span class="badge badge-success">Paid</span>
-                                                    @elseif($order->payment->status == 'Failed')
+                                                    @else
                                                     <span class="badge badge-danger">Failed</span>
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
-                                        @endforeach
                                     </table>
                                 </div>
                                 @endif

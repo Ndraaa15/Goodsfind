@@ -27,12 +27,20 @@
                                 <p>{{$product->description}}</p>
                             </div>
                             <div class="product-details-action">
-                                <a href="{{ route('add-cart-item', ['product_id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                <form id="add-to-cart-form-{{$product->id}}" action="{{ route('add-cart-item', ['product_id' => $product->id])}}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                </form>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('add-to-cart-form-{{$product->id}}').submit();" class="btn-product btn-cart"><span>add to cart</span></a>
                                 <div class="details-action-wrapper">
-                                    <a href="{{ route('add-wishlist', ['product_id' => $product->id]) }}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                    <form id="add-wishlist-{{$product->id}}" action="{{ route('add-wishlist', ['product_id' => $product->id])}}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                    </form>
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('add-wishlist-{{$product->id}}').submit();" class="btn-product btn-wishlist"><span>add to wishlist</span></a>
                                 </div>
                                 <div class="details-action-wrapper">
-                                    <a href="{{ url('chatify') }}" class="btn-product" title="Wishlist"><span> <i class="icon-comment-o"></i>Message</span></a>
+                                    <a href="{{ url('chatify/' . $product->merchant->user_id)  }}" class="btn-product" title="Wishlist"><span> <i class="icon-comment-o"></i>Message</span></a>
                                 </div>
                             </div>
                             <div class="product-details-footer">

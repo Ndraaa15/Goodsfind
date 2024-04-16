@@ -77,9 +77,7 @@ class Product extends Model
         $products = Product::query()->with('merchant');
 
         if (!empty($filter['category'])) {
-            $products->whereHas('product_category', function ($query) use ($filter) {
-                $query->where('id', $filter['category']);
-            });
+            $products->where('category_id', $filter['category']);
         }
 
         if (!empty($filter['condition'])) {

@@ -113,21 +113,21 @@
                         <td class="action-col">
                             {{ $orderItem->quantity }}
                         </td>
-                        @if($orderItem->status_order == 'pending')
+                        @if($orderItem->status_order == 'Pending')
                         <td class="action-col">
                             <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}">
                                 Pending
                             </button>
                         </td>
-                        @elseif($orderItem->status_order == 'accepted')
+                        @elseif($orderItem->status_order == 'Accepted')
                         <td class="action-col">
                             <button href="#" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}">
                                 Accepted
                             </button>
                         </td>
-                        @elseif($orderItem->status_order == 'rejected')
+                        @elseif($orderItem->status_order == 'Rejected')
                         <td class="action-col">
-                            <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}">
+                            <button href="#" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}">
                                 Rejected
                             </button>
                         </td>

@@ -5,6 +5,6 @@ namespace App;
 enum StatusPayment: string
 {
     case PENDING = 'Pending';
-    case SUCCESS = 'Paid';
+    case PAID = 'Paid';
     case FAILED = 'Failed';
 }
