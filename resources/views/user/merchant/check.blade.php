@@ -18,7 +18,7 @@
                                     <input type="text" class="form-control" id="shipping-address" name="shipping-address" style="outline: none;content: 'Select some files';" disabled>
                                 </div>
                                 <div class="form-footer">
-                                    <form id="update-form" action="{{ route('order', ['id' => 'PRODUCT_ID'])}}">
+                                    <form id="update-form" action="{{ route('get-product-by-id', ['id' => 'PRODUCT_ID'])}}">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="status" id="order-status" value="">
