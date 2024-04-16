@@ -11,50 +11,55 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Middleware\AuthMiddleware;
 
-Route::view('/', 'homepage')->name('homepage');
+Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/faq', 'faq')->name('faq');
 Route::view('/contact', 'contact')->name('contact');
-Route::view('/404', '404')->name('404');
-Route::view('/blog', 'blog')->name('blog');
+
+Route::fallback(function () {
+    return response()->view('404', [], 404);
+});
 
 // Authentication
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/signin', [AuthController::class, 'signin'])->name('signin');
     Route::get('/signout', [AuthController::class, 'signout'])->name('signout');
-    Route::get('/', [AuthController::class, 'auth_page'])->name('auth');
 });
 
 // Merchant
 Route::prefix('merchant')->middleware('auth')->group(function () {
     Route::patch('/', [MerchantController::class, 'update_merchant'])->name('update-merchant');
+    Route::get('/', [MerchantController::class, 'get_merchant'])->name('merchant');
 });
 
 // Product
-Route::prefix('product')->middleware('auth')->group(function () {
+Route::prefix('product')->group(function () {
     Route::get('/search', [ProductController::class, 'search_product'])->name('search-product');
     Route::get('/{id}', [ProductController::class, 'get_product_by_id'])->name('get-product-by-id');
     Route::get('/', [ProductController::class, 'get_all_product'])->name('get-all-product');
-    Route::post('/', [ProductController::class, 'create_product'])->name('create-product');
-    Route::patch('/{id}', [ProductController::class, 'update_product'])->name('update-product');
-    Route::delete('/{id}', [ProductController::class, 'delete_product'])->name('delete-product');
+    Route::post('/', [ProductController::class, 'create_product'])->name('create-product')->middleware('auth');
+    Route::patch('/{id}', [ProductController::class, 'update_product'])->name('update-product')->middleware('auth');
+    Route::delete('/{id}', [ProductController::class, 'delete_product'])->name('delete-product')->middleware('auth');
 });
-
 
 // Cart
 Route::prefix('cart')->middleware('auth')->group(function () {
     Route::post('/{product_id}', [CartController::class, 'add_cart_item'])->name('add-cart-item');
     Route::get('/', [CartController::class, 'get_cart'])->name('get-cart');
     Route::delete('/{product_id}', [CartController::class, 'delete_cart_item'])->name('delete-cart-item');
-    // Route::get('/', [CartController::class, 'cart_page'])->name('cart-page');
-})->middleware(AuthMiddleware::class);
+});
+
+Route::prefix('order')->middleware('auth')->group(function () {
+    Route::patch('/{order_item_id}', [CartController::class, 'update_status_order'])->name('update-status-order');
+});
+
 
 // Checkout
 Route::prefix('checkout')->middleware('auth')->group(function () {
     Route::post('/', [PaymentController::class, 'checkout'])->name('checkout');
-    Route::get('/', [PaymentController::class, 'checkout_page'])->name('checkout');
-})->middleware(AuthMiddleware::class);
+    Route::get('/', [PaymentController::class, 'checkout_page'])->name('get-checkout');
+});
 
 // Review
 Route::prefix('review')->middleware('auth')->group(function () {
@@ -62,21 +67,20 @@ Route::prefix('review')->middleware('auth')->group(function () {
     Route::get('/{product_id}', [ReviewController::class, 'get_review'])->name('get-review');
     Route::patch('/{product_id}', [ReviewController::class, 'update_review'])->name('update-review');
     Route::delete('/{product_id}', [ReviewController::class, 'delete_review'])->name('delete-review');
-
-})->middleware(AuthMiddleware::class);
+});
 
 // User
 Route::prefix('user')->middleware('auth')->group(function () {
     Route::patch('/', [UserController::class, 'update_user'])->name('update-user');
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-})->middleware(AuthMiddleware::class);
+    Route::get('/profile', [UserController::class, 'user_profile'])->name('profile');
+});
 
 // Wishlist
-Route::prefix('wishlist')->middleware('auth')->group( function () {
+Route::prefix('wishlist')->middleware('auth')->group(function () {
     Route::post('/{product_id}', [WishlistController::class, 'add_wishlist'])->name('add-wishlist');
     Route::delete('/{product_id}', [WishlistController::class, 'delete_wishlist'])->name('delete-wishlist');
     Route::get('/', [WishlistController::class, 'get_wishlist'])->name('wishlist');
-})->middleware(AuthMiddleware::class);
+});
 
 // Testing
 Route::group(['prefix' => 'testing'], function () {

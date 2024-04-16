@@ -13,11 +13,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function auth_page()
-    {
-        return view('auth');
-    }
-
     public function register(Request $request)
     {
         try {
@@ -47,7 +42,7 @@ class AuthController extends Controller
             ]);
             $user->makeHidden(['password', 'remember_token']);
             DB::commit();
-            return redirect()->route('auth', [
+            return redirect()->route('home', [
                 'user' => $user,
             ]);
         } catch (\Exception $e) {
@@ -59,7 +54,6 @@ class AuthController extends Controller
     public function signin(Request $request)
     {
         try {
-
             $request->validate([
                 'signin-email' => ['required', 'email'],
                 'signin-password' => ['required'],
@@ -74,7 +68,7 @@ class AuthController extends Controller
                 return redirect()->route('auth')->with('error', 'Invalid email or password');
             }
 
-            return redirect()->route('homepage', [
+            return redirect()->route('home', [
                 'user' => auth()->user(),
             ]);
         } catch (\Exception $e) {
@@ -85,6 +79,6 @@ class AuthController extends Controller
     public function signout()
     {
         auth()->logout();
-        return redirect()->route('homepage');
+        return redirect()->route('home');
     }
 }

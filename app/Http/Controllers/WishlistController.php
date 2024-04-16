@@ -7,14 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
-    public function wishlist()
-    {
-        return view('wishlist');
-    }
-
     public function add_wishlist(int $product_id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $wishlistModel = new Wishlist();
             $wishlist = $wishlistModel->create_wishlist([
@@ -22,10 +17,9 @@ class WishlistController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
             DB::commit();
-            $wishlistWithProduct = $wishlist->load('product');
-            dd($wishlistWithProduct);
-        }
-        catch(\Exception $e){
+            // $wishlistWithProduct = $wishlist->load('product');
+            return redirect()->route('wishlist');
+        } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
         }
@@ -33,14 +27,13 @@ class WishlistController extends Controller
 
     public function delete_wishlist(int $product_id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $wishlistModel = new Wishlist();
             $wishlistModel->delete_wishlist($product_id, auth()->user()->id);
             DB::commit();
-            dd('Wishlist deleted!');
-        }
-        catch(\Exception $e){
+            return redirect()->route('wishlist');
+        } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
         }
@@ -51,6 +44,14 @@ class WishlistController extends Controller
         $wishlistModel = new Wishlist();
         $wishlists = $wishlistModel->get_wishlist(auth()->user()->id);
         $wishlistsWithProduct = $wishlists->load('product');
-        dd($wishlistsWithProduct);
+        return view('user.wishlist', [
+            'wishlists' => $wishlistsWithProduct,
+        ]);
+    }
+
+    public static function count_wishlist()
+    {
+        $wishlistModel = new Wishlist();
+        return  $wishlistModel->count_wishlist(auth()->user()->id);
     }
 }

@@ -43,4 +43,9 @@ class Wishlist extends Model
     {
         return Wishlist::where('user_id', $user_id)->get();
     }
+
+    public function count_wishlist(int $user_id)
+    {
+        return Wishlist::where('user_id', $user_id)->count();
+    }
 }

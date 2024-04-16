@@ -31,4 +31,9 @@ class ShippingAddress extends Model
     {
         return ShippingAddress::create($shippingAddress);
     }
+
+    public function get_shipping_address_by_order_id(int $orderID): ShippingAddress
+    {
+        return ShippingAddress::where('order_id', $orderID)->first();
+    }
 }

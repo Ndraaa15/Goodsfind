@@ -17,7 +17,7 @@ class Product extends Model
         'description',
         'price',
         'image',
-        'category',
+        'category_id',
         'condition',
         'stock',
         'discount',
@@ -47,6 +47,16 @@ class Product extends Model
         return $this->hasMany(Wishlist::class, 'product_id', 'id');
     }
 
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id', 'id');
+    }
+
+    public function product_category()
+    {
+        return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
+    }
+
     public function create_product(array $product): Product
     {
         return Product::create($product);
@@ -67,11 +77,13 @@ class Product extends Model
         $products = Product::query()->with('merchant');
 
         if (!empty($filter['category'])) {
-            $products->where('category', $filter['category']);
+            $products->whereHas('product_category', function ($query) use ($filter) {
+                $query->where('id', $filter['category']);
+            });
         }
 
         if (!empty($filter['condition'])) {
-            $products->where('condition', $filter['condition']);
+            $products->product_category('condition', $filter['condition']);
         }
 
         if (!empty($filter['min_price']) && !empty($filter['max_price'])) {
@@ -87,6 +99,11 @@ class Product extends Model
                 $query->where('location', $filter['location']);
             });
         }
+
+        if(!empty($filter['is_promotion)'])){
+            $products->where('is_promotion', $filter['is(promotion)']);
+        }
+
         return $products->get();
     }
 

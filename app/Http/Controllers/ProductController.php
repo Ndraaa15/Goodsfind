@@ -7,20 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Merchant;
 use App\ProductCondition;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 
 class ProductController extends Controller
 {
-    public function products_page()
-    {
-        return view('shop');
-    }
-    public function product_page()
-    {
-        return view('product');
-    }
-
     public function create_product(Request $request)
     {
         try {
@@ -47,8 +39,8 @@ class ProductController extends Controller
                     'condition' => ['required',  new Enum(ProductCondition::class)],
                     'stock' => ['required', 'numeric'],
                     'discount' => ['required', 'numeric'],
-                    'time_usage' => ['required', 'numeric'],
-                    'is_promotion' => ['required', 'boolean'],
+                    'time-usage' => ['required', 'numeric'],
+                    'is-promotion' => ['required', 'boolean'],
                 ]
             );
             $merchant = $merchantModel->get_merchant_by_user_id(auth()->user()->id);
@@ -59,15 +51,15 @@ class ProductController extends Controller
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
                 'image' => $imageUrl,
-                'category' => $request->input('category'),
+                'category_id' => $request->input('category'),
                 'condition' => $request->input('condition'),
                 'stock' => $request->input('stock'),
                 'discount' => $request->input('discount'),
-                'time_usage' => $request->input('time_usage'),
-                'is_promotion' => $request->input('is_promotion'),
+                'time_usage' => $request->input('time-usage'),
+                'is_promotion' => $request->input('is-promotion'),
             ]);
             DB::commit();
-            dd($product->load('merchant'));
+            return redirect()->route('merchant');
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
@@ -84,24 +76,44 @@ class ProductController extends Controller
             'time_usage' => $request->input('timeUsage'),
         ];
 
-        $product = new Product();
-        $products = $product->get_all_product($filerProduct);
+        $keyFilterProduct = json_encode($filerProduct);
+        $products = null;
+        if (Cache::has($keyFilterProduct)) {
+            $products = Cache::get($keyFilterProduct);
+        } else {
+            $productModel = new Product();
+            $products = $productModel->get_all_product($filerProduct);
+            Cache::put($keyFilterProduct, $products, 60);
+        }
 
-        dd($products->load('merchant'));
+        return view(
+            'shop',
+            ['products' => $products->load('merchant')->load('product_category')]
+        );
     }
 
 
     public function get_product_by_id(int $id)
     {
-        $product = new Product();
-        $product = $product->get_product_by_id($id);
+        $keyProductID = "product-$id";
+        $product = null;
+        if (Cache::has($keyProductID)) {
+            $product = Cache::get($keyProductID);
+        } else {
+            $product = new Product();
+            $product = $product->get_product_by_id($id);
+            Cache::put($keyProductID, $product, 60);
+        }
 
-        dd($product->load('merchant'));
+        return view(
+            'product',
+            ['product' => $product->load('merchant')->load('product_category')]
+        );
     }
 
     public function update_product(Request $request, int $id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $productModel = new Product();
             $product = $productModel->get_product_by_id($id);
@@ -153,9 +165,8 @@ class ProductController extends Controller
 
             $productModel->update_product($product);
             DB::commit();
-            dd($product->load('merchant'));
-        }
-        catch (\Exception $e) {
+            return redirect()->route('merchant');
+        } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
         }
@@ -166,7 +177,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->delete_product($id);
 
-        dd('Product deleted');
+        return redirect()->route('merchant');
     }
 
     public function search_product(Request $request)
@@ -174,6 +185,6 @@ class ProductController extends Controller
         $productModel = new Product();
         $products = $productModel->search_product($request->query('search'));
 
-        dd($products->load('merchant'));
+        return redirect()->route('get-all-product', ['products' => $products->load('merchant')->load('product_category')]);
     }
 }

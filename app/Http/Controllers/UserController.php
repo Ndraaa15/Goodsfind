@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function dashboard()
+    public function user_profile()
     {
-        return view('dashboard', [
+        $orderModel = new Order();
+        $orders = $orderModel->get_order_by_user_id(auth()->user()->id);
+
+        return view('user.profile.index', [
             'user' => auth()->user(),
+            'orders' => $orders,
         ]);
     }
 

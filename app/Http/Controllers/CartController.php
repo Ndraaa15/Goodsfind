@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-
-    public function cart_page()
-    {
-        return view('cart');
-    }
-
     public function add_cart_item(Request $request, int $product_id)
     {
         try {
@@ -28,35 +22,37 @@ class CartController extends Controller
             $cart = $cartModel->get_cart_by_user_id(auth()->user()->id);
             $cartItem = $cartItemModel->get_cart_item($cart->id, $product_id);
 
-            if($request->input('quantity') > $product->stock){
+            if ($request->input('quantity') > $product->stock) {
                 throw new \Exception('Stock is not enough!');
+            }
+
+            $quantity = 1;
+            if (!empty($request->input('quantity'))) {
+                $quantity = $request->input('quantity');
             }
 
             if ($cartItem instanceof CartItem) {
                 $updateCartItem = [
                     'cart_id' => $cart->id,
                     'product_id' => $product->id,
-                    'quantity' => $request->input('quantity'),
+                    'quantity' => $quantity,
                     'price' => $product->price,
-                    'total_price_product' => $product->price * $request->input('quantity'),
+                    'total_price_product' => $product->price * $quantity,
                 ];
                 $cartItemModel->update_cart_item($updateCartItem);
             } else {
                 $cartItemModel->add_cart_item([
                     'cart_id' => $cart->id,
                     'product_id' => $product->id,
-                    'quantity' => $request->input('quantity'),
+                    'quantity' => $quantity,
                     'price' => $product->price,
-                    'total_price_product' => $product->price * $request->input('quantity'),
+                    'total_price_product' => $product->price * $quantity,
                 ]);
             }
 
             $cart->update_total_price();
             DB::commit();
-            dd([
-                'cart' => $cart,
-                'cart_items' => $cart->cart_items()->with('product')->get(),
-            ]);
+            return redirect()->route('get-cart');
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
@@ -65,7 +61,7 @@ class CartController extends Controller
 
     public function delete_cart_item(int $product_id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $cartModel = new Cart();
             $cart = $cartModel->get_cart_by_user_id(auth()->user()->id);
@@ -75,12 +71,8 @@ class CartController extends Controller
 
             $cart->update_total_price();
             DB::commit();
-            dd([
-                'cart' => $cart,
-                'cart_items' => $cart->cart_items()->with('product')->get(),
-            ]);
-        }
-        catch (\Exception $e) {
+            return redirect()->route('get-cart');
+        } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
         }
@@ -91,10 +83,16 @@ class CartController extends Controller
         $cartModel = new Cart();
         $cart = $cartModel->get_cart_by_user_id(auth()->user()->id);
 
-        $cartItems = $cart->cart_items()->with('product')->get();
-        dd([
+        $cartItems = $cart->cart_items()->get();
+        return view('user.cart', [
             'cart' => $cart,
-            'cart_items' => $cartItems,
+            'cartItems' => $cartItems->load('product')->load('product.merchant'),
         ]);
+    }
+
+    public static function count_cart()
+    {
+        $cartModel = new Cart();
+        return $cartModel->count_cart(auth()->user()->id);
     }
 }

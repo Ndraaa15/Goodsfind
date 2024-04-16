@@ -17,25 +17,30 @@ class Order extends Model
         'status_order',
     ];
 
-    protected function casts():array
-    {
-        return [
-            'condition' => StatusOrder::class,
-        ];
-    }
-
     public function user()
     {
-        return Order::belongsTo(User::class);
+        return Order::belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function order_items()
+    {
+        return Order::hasMany(OrderItem::class, 'order_id', 'id');
     }
 
     public function payment()
     {
-        return Order::belongsTo(Payment::class);
+        return $this->hasOne(Payment::class, 'order_id', 'id');
     }
 
     public function create_order(array $order)
     {
         return Order::create($order);
+    }
+
+    public function get_order_by_user_id(int $user_id)
+    {
+        return Order::with(['order_items.product', 'payment'])
+            ->where('user_id', $user_id)
+            ->get();
     }
 }

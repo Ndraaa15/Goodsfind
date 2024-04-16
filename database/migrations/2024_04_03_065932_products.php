@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price');
             $table->text('image');
-            $table->string('category');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('condition');
             $table->integer('stock');
             $table->decimal('discount');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('product_categories')->onDelete('set null');
         });
     }
 

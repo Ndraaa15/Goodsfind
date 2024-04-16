@@ -16,6 +16,13 @@ class ReviewController extends Controller
             $reviewModel = new Review();
             $productModel = new Product();
 
+            $request->validate([
+                'review' => ['required', 'string'],
+                'sub_review' => ['required', 'string'],
+                'rating' => ['required', 'numeric', 'min:1', 'max:5'],
+            ]);
+
+
             $product = $productModel->get_product_by_id($product_id);
             $product->total_review = $product->total_reviews + 1;
             $product->rating = ($product->rating + $request->input('rating')) / $product->total_review;
@@ -52,6 +59,12 @@ class ReviewController extends Controller
 
             $review = $reviewModel->get_review_by_user_product_id($product_id, auth()->user()->id);
             $product = $productModel->get_product_by_id($product_id);
+
+            $request->validate([
+                'review' => ['string'],
+                'sub_review' => ['string'],
+                'rating' => ['numeric', 'min:1', 'max:5'],
+            ]);
 
             $updateReview = [
                 'review' => $review->review,

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('order_code')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('total_price');
-            $table->string('status_order')->default('pending');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

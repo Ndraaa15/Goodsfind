@@ -32,7 +32,7 @@ class Cart extends Model
     public function get_cart_by_user_id(int $user_id): Cart
     {
         return Cart::where('user_id', $user_id)
-        ->first();
+            ->first();
     }
 
     public function update_total_price()
@@ -44,5 +44,15 @@ class Cart extends Model
 
         $this->total_price = $totalPrice;
         $this->save();
+    }
+
+    public function count_cart(int $user_id)
+    {
+        $cart = Cart::where('user_id', $user_id)->first();
+
+        if ($cart) {
+            return $cart->cart_items()->count();
+        }
+        return 0;
     }
 }

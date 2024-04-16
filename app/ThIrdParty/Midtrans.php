@@ -3,7 +3,9 @@
 namespace App\ThirdParty;
 
 use App\Models\Payment;
-use App\Models\ShippingAddress;
+use App\Models\Order;
+use App\Models\User;
+
 
 class Midtrans
 {
@@ -15,19 +17,19 @@ class Midtrans
         \Midtrans\Config::$is3ds = true;
     }
 
-    public function chargeCoreApi(Payment $payment)
+    public function chargeSnap(Payment $payment, Order $order,  $user)
     {
-        $params = [
-            'payment_type' => 'bank_transfer',
-            'transaction_details' => [
-                'order_id' => $payment->id,
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order->order_code,
                 'gross_amount' => $payment->total_payment,
-            ],
-            'bank_transfer' => [
-                'bank' => $payment->payment_type,
-            ],
-        ];
+            ),
+            'customer_details' => array(
+                'first_name' => $user->first_name,
+                'email' => $user->email,
+            ),
+        );
 
-        return \Midtrans\CoreApi::charge($params);
+        return \Midtrans\Snap::getSnapToken($params);
     }
 }
