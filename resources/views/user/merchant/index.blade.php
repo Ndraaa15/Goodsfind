@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 @if($products->isEmpty())
-                <p>You dont have any product</p>
+                <p>You don't have any product</p>
                 @else
                 @foreach($products as $product)
                 <tbody>
@@ -51,7 +51,7 @@
                                 @endif
                         </td>
                         <td class="action-col">
-                            <button href="#merchant-modal" data-toggle="modal" class="btn btn-outline btn-edit" data-product="{{ $product }}">
+                            <button href="#update-modal" data-toggle="modal" class="btn btn-outline btn-edit" data-product='@json($product)'>
                                 Edit
                             </button>
                         </td>
@@ -89,7 +89,7 @@
                     </tr>
                 </thead>
                 @if($orderItems->isEmpty())
-                <p>You dont have any order</p>
+                <p>You don't have any order</p>
                 @else
                 @foreach($orderItems as $orderItem)
                 @php
@@ -121,13 +121,13 @@
                         </td>
                         @elseif($orderItem->status_order == 'Accepted')
                         <td class="action-col">
-                            <button href="#" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}">
+                            <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}">
                                 Accepted
                             </button>
                         </td>
                         @elseif($orderItem->status_order == 'Rejected')
                         <td class="action-col">
-                            <button href="#" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}">
+                            <button href="#check-modal" data-toggle="modal" class="btn btn-outline" data-shipping-address-name="{{ $shippingAddress->name }}" data-shipping-address="{{ $shippingAddress->city }}" data-order-item-id="{{ $orderItem->id }}>
                                 Rejected
                             </button>
                         </td>
@@ -142,4 +142,5 @@
 </main>
 @include('user.merchant.form')
 @include('user.merchant.check')
+@include('user.merchant.update')
 @endsection

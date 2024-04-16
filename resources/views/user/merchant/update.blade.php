@@ -8,10 +8,12 @@
                 <div class="form-box">
                     <div class="form-tab">
                         <div class="tab-content" id="tab-content-5">
-                            <form action="{{ route('update-product', )}}">
+                            <form id="update-form" action="{{ route('update-product', ['id' => 'PRODUCT_ID'])}}">
+                                @csrf
+                                @method('PATCH')
                                 <div class="form-group">
                                     <label>Image</label>
-                                    <input type="file" class="form-control" name="image" required>
+                                    <input type="file" class="form-control-file" name="image">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="id" id="product-id" hidden>
@@ -46,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Is Promotion</label>
-                                    <input type="text" class="form-control" name="is_promotion" id="product-is-promotion" required>
+                                    <input type="radio" class="form-control" name="is_promotion" id="product-is-promotion">
                                 </div>
                                 <div class="form-footer">
                                     <button type="submit" class="btn btn-outline-primary-2">
@@ -66,7 +68,7 @@
 <script>
     $(document).ready(function() {
         $('.btn-edit').on('click', function() {
-            const product = JSON.parse($(this).data('product'));
+            const product = JSON.parse($(this).attr('data-product'));
             $('#product-id').val(product.id);
             $('#product-name').val(product.name);
             $('#product-price').val(product.price);
@@ -76,6 +78,10 @@
             $('#product-discount').val(product.discount);
             $('#product-time-usage').val(product.time_usage);
             $('#product-is-promotion').val(product.is_promotion);
+
+            let formAction = $('#update-form').attr('action');
+            formAction = formAction.replace('PRODUCT_ID', product.id);
+            $('#update-form').attr('action', formAction);
         });
     });
 </script>

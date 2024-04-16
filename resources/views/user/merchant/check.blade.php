@@ -18,46 +18,19 @@
                                     <input type="text" class="form-control" id="shipping-address" name="shipping-address" style="outline: none;content: 'Select some files';" disabled>
                                 </div>
                                 <div class="form-footer">
-                                    <form id="accept-order" action="#" method="POST">
+                                    <form id="update-form" action="{{ route('order', ['id' => 'PRODUCT_ID'])}}">
                                         @csrf
                                         @method('PATCH')
-                                        <input type="hidden" id="order-item-id" name="order-item-id"> <!-- Use input type "hidden" to store the order ID -->
-                                        <input type="hidden" name="status" value="Accepted"> <!-- Add input for status -->
-                                        <button type="button" class="btn btn-outline-primary-2 btn-accept" onclick="acceptOrder()">
+                                        <input type="hidden" name="status" id="order-status" value="">
+                                        <button type="button" class="btn btn-outline-primary-2 btn-accept" onclick="setOrderStatus('accept')">
                                             <span>Accept</span>
                                             <i class="icon-check"></i>
                                         </button>
+                                        <button type="submit" class="btn btn-outline-primary-2 btn-reject" onclick="setOrderStatus('reject')">
+                                            <span>Reject</span>
+                                            <i class="icon-close"></i>
+                                        </button>
                                     </form>
-                                    <script>
-                                        // Define the acceptOrder function in the global scope
-                                        function acceptOrder() {
-                                            if (confirm('Are you sure you want to accept this order?')) {
-                                                var orderId = $('#order-item-id').val(); // Get the order ID from the hidden input field
-                                                var endpoint = '/order/' + orderId; // Construct the endpoint
-
-                                                // Set the form action and submit
-                                                var form = $('#accept-order'); // Get the form element using jQuery
-                                                if (form.length > 0) { // Check if the form element is found
-                                                    form.attr('action', endpoint);
-                                                    form.submit();
-                                                } else {
-                                                    console.error('Form element not found.');
-                                                }
-                                            }
-                                        }
-
-                                        document.addEventListener("DOMContentLoaded", function() {
-                                            $('#check-modal').on('show.bs.modal', function(event) {
-                                                var button = $(event.relatedTarget);
-                                                var orderItemId = button.data('order-item-id');
-                                                $('#order-item-id').val(orderItemId); // Set the value of the hidden input field
-                                            });
-                                        });
-                                    </script>
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-reject">
-                                        <span>Reject</span>
-                                        <i class="icon-close"></i>
-                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -69,15 +42,24 @@
 </div>
 
 <script>
+    function setStatus(status) {
+        $('#order-status').val(status);
+        $('#update-form').submit();
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         $('#check-modal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var name = button.data('shipping-address-name');
-            var address = button.data('shipping-address');
+            const button = $(event.relatedTarget);
+            const name = button.data('shipping-address-name');
+            const address = button.data('shipping-address');
 
-            var modal = $(this);
+            const modal = $(this);
             modal.find('#shipping-address-name').val(name);
             modal.find('#shipping-address').val(address);
+
+            let formAction = $('#update-form').attr('action');
+            formAction = formAction.replace('PRODUCT_ID', data('data-order-item-id'));
+            $('#update-form').attr('action', formAction);
         });
     });
 </script>
