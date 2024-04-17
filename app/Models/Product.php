@@ -99,10 +99,10 @@ class Product extends Model
         }
 
         if(!empty($filter['is_promotion)'])){
-            $products->where('is_promotion', $filter['is(promotion)']);
+            $products->where('is_promotion', $filter['is_promotion']);
         }
 
-        return $products->paginate(5);
+        return $products->where('status_approved', 'Accepted')->paginate(5);
     }
 
     public function get_product_by_id(int $id): Product

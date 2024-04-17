@@ -43,6 +43,7 @@ Route::prefix('product')->group(function () {
     Route::post('/', [ProductController::class, 'create_product'])->name('create-product')->middleware('auth');
     Route::patch('/{id}', [ProductController::class, 'update_product'])->name('update-product')->middleware('auth');
     Route::delete('/{id}', [ProductController::class, 'delete_product'])->name('delete-product')->middleware('auth');
+    Route::patch('/status/{id}', [ProductController::class, 'update_status_product'])->name('update-status-product')->middleware('auth');
 });
 
 // Cart

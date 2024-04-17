@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('products')) {
             $productModel = new Product();
             return  $productModel->get_all_product([
-                'is_promotion' => 1
+                'is_promotion' => true
             ]);
         }
         return [];

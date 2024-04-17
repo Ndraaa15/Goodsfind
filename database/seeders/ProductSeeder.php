@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'stock' => 20,
                 'discount' => 0,
                 'time_usage' => 0,
-                'is_promotion' => false,
+                'is_promotion' => true,
             ],
             [
                 'id' => 3,
@@ -67,6 +67,7 @@ class ProductSeeder extends Seeder
                 'stock' => 30,
                 'discount' => 0,
                 'time_usage' => 0,
+                'status_approved' => 'Accepted',
                 'is_promotion' => false,
             ],
             [
@@ -82,6 +83,7 @@ class ProductSeeder extends Seeder
                 'discount' => 0,
                 'time_usage' => 0,
                 'is_promotion' => false,
+                'status_approved' => 'Accepted',
             ],
             [
                 'id' => 6,
@@ -95,7 +97,8 @@ class ProductSeeder extends Seeder
                 'stock' => 30,
                 'discount' => 0,
                 'time_usage' => 0,
-                'is_promotion' => false,
+                'is_promotion' => true,
+                'status_approved' => 'Accepted',
             ],
         ];
 

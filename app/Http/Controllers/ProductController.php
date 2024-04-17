@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Merchant;
 use App\ProductCondition;
+use App\ProductStatus;
+use App\StatusProduct;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
@@ -180,5 +182,27 @@ class ProductController extends Controller
         $products = $productModel->search_product($request->query('search'));
 
         return redirect()->route('get-all-product', ['products' => $products->load('merchant')->load('product_category')]);
+    }
+
+    public function update_status_product(Request $request, int $product_id)
+    {
+        try {
+            DB::beginTransaction();
+            $productModel = new Product();
+            $product = $productModel->get_product_by_id($product_id);
+
+            $request->validate(
+                [
+                    'status-product' => [new Enum(StatusProduct::class)],
+                ]
+            );
+
+            $product->status_approved = $request->input('status-product');
+            $productModel->update_product($product);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+        }
     }
 }
