@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-6 col-lg-3">
                                     <figure class="product-media">
-                                        <a href="/product">
+                                        <a href="{{ route('get-product-by-id', ['id' => $product->id]) }}">
                                             <img src="{{$product->image ?: '../assets/images/slide-2.jpg'}}" alt="Product image" class="product-image">
                                         </a>
                                     </figure>
@@ -57,39 +57,28 @@
                         <ul class="pagination justify-content-center">
                             @php
                             use Illuminate\Support\Facades\Request;
-
                             $queryParams = Request::query();
-
                             unset($queryParams['page']);
-
                             $queryString = http_build_query($queryParams);
                             @endphp
-
                             <li class="page-item {{ $products->previousPageUrl() ? '' : 'disabled' }}">
                                 <a class="page-link page-link-prev" href="{{ $products->previousPageUrl() ? $products->previousPageUrl().($queryString ? '&'.$queryString : '') : '#' }}" aria-label="Previous" tabindex="-1" aria-disabled="{{ $products->previousPageUrl() ? 'false' : 'true' }}">
                                     <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
                                 </a>
                             </li>
-
-                            {{-- Pagination Links --}}
                             @for ($page = 1; $page <= $products->lastPage(); $page++)
                                 <li class="page-item {{ $page == $products->currentPage() ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $products->url($page) }}{{ $queryString ? '&' . $queryString : '' }}">{{ $page }}</a>
                                 </li>
                                 @endfor
-
                                 <li class="page-item {{ $products->nextPageUrl() ? '' : 'disabled' }}">
                                     <a class="page-link page-link-next" href="{{ $products->nextPageUrl() ? $products->nextPageUrl().($queryString ? '&'.$queryString : '') : '#' }}" aria-label="Next">
                                         Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
                                     </a>
                                 </li>
-
                                 <li class="page-item-total">of {{ $products->lastPage() }}</li>
                         </ul>
                     </nav>
-
-
-
                 </div>
                 <aside class="col-lg-3 order-lg-first">
                     <div class="sidebar sidebar-shop">
@@ -107,9 +96,9 @@
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count">
                                         @foreach($categories as $category)
-                                        <div class="filter-item">
+                                        <div class="product-cat">
                                             <div>
-                                                <p for="{{$category->id}}"><a href="/product?category={{$category->id}}"">{{$category->category}}</a></p>
+                                                <p><a href="/product?category={{$category->id}}"">{{$category->category}}</a></p>
                                             </div>
                                         </div>
                                         @endforeach

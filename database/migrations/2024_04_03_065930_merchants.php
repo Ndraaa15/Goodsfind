@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
             $table->decimal('service_price')->default(0);
-            $table->string('account_number')->unique()->default('');
+            $table->string('account_number')->default('');
             $table->string('bank_name')->default('');
             $table->string('location')->default('');
             $table->decimal('balance')->default(0);

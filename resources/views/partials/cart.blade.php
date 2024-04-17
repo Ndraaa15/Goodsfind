@@ -4,9 +4,8 @@ $cart = $cartModel->get_cart_by_user_id(auth()->user()->id);
 $cartItems = $cart->cart_items()->with('product')->get();
 @endphp
 
-
 <div class="dropdown cart-dropdown">
-    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+    <a href="{{ route('get-cart') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
         <div class="icon">
             <i class="icon-shopping-cart"></i>
             <span class="cart-count">{{$cartTotal}}</span>

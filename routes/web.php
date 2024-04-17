@@ -111,4 +111,6 @@ Route::group(['prefix' => 'testing'], function () {
     Route::view('first-time-message', 'testing.message.first-time-message')->name('testing-first-time-message');
 
     Route::view('update-status-order', 'testing.order.update-status-order')->name('testing-update-status-order');
+
+    Route::view('redirect', 'redirect')->name('redirect');
 });

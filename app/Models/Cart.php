@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Type\Decimal;
 
 class Cart extends Model
 {
@@ -35,15 +36,19 @@ class Cart extends Model
             ->first();
     }
 
-    public function update_total_price()
+    public function update_total_price(array $cart)
     {
         $cartItems = $this->cart_items;
-        $totalPrice = $cartItems->sum(function ($item) {
-            return $item->total_price_product;
-        });
+        if ($cartItems == null || empty($cartItems) || $cartItems->count() == 0 || !empty($cart['total_price'])){
+            $this->where('id', $cart['cart_id'])->update(['total_price' => $cart['total_price']]);
+        } else {
+            $totalPrice = $cartItems->sum(function ($item) {
+                return $item->total_price_product;
+            });
 
-        $this->total_price = $totalPrice;
-        $this->save();
+            $this->total_price = $totalPrice;
+            $this->save();
+        }
     }
 
     public function count_cart(int $user_id)

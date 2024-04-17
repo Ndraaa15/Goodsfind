@@ -50,7 +50,7 @@ class CartController extends Controller
                 ]);
             }
 
-            $cart->update_total_price();
+            $cart->update_total_price([]);
             DB::commit();
             return redirect()->route('get-cart');
         } catch (\Exception $e) {
@@ -69,7 +69,7 @@ class CartController extends Controller
             $cartItemModel = new CartItem();
             $cartItemModel->delete_cart_item($product_id, $cart->id);
 
-            $cart->update_total_price();
+            $cart->update_total_price([]);
             DB::commit();
             return redirect()->route('get-cart');
         } catch (\Exception $e) {

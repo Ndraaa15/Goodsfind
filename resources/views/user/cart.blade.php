@@ -118,12 +118,12 @@ $serviceTax += $cartItem->product->merchant->service_price;
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>Rp.{{$cart->total_price }}</td>
+                                        <td>Rp{{$cart->total_price }}</td>
                                     </tr>
                                     <tr class="summary-subtotal">
                                         <td>Service Tax:</td>
                                         <input type="text" name="service-price" hidden value="{{ $serviceTax }}">
-                                        <td>Rp.{{$serviceTax}}</td>
+                                        <td>Rp{{$serviceTax}}</td>
                                     </tr>
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
@@ -137,7 +137,7 @@ $serviceTax += $cartItem->product->merchant->service_price;
                                                 <label class="custom-control-label" for="standart-shipping">Standart:</label>
                                             </div>
                                         </td>
-                                        <td>Rp.20000</td>
+                                        <td>Rp20000</td>
                                     </tr>
                                     <tr class="summary-shipping-row">
                                         <td>
@@ -147,7 +147,7 @@ $serviceTax += $cartItem->product->merchant->service_price;
                                                 <label class="custom-control-label" for="express-shipping">Express:</label>
                                             </div>
                                         </td>
-                                        <td>Rp.50000</td>
+                                        <td>Rp50000</td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
@@ -171,7 +171,7 @@ $serviceTax += $cartItem->product->merchant->service_price;
                                 </tbody>
                                 </form>
                             </table>
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('checkout').submit();" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+                            <a href="{{ route('home') }}" onclick="event.preventDefault(); document.getElementById('checkout').submit();" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                         </div>
                         <a href="{{ route('get-all-product') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </aside>

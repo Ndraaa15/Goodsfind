@@ -53,7 +53,7 @@ class PaymentController extends Controller
                 $productModel->update_product($product);
             }
             $cartItemModel->delete_all_cart_item($cart->id);
-            $cart->update_total_price();
+            $cart->update_total_price(['total_price' => 0, 'cart_id' => $cart->id, 'user_id' => auth()->user()->id]);
 
             $shippingAddressModel->create_shipping_address([
                 'order_id' => $order->id,
@@ -77,10 +77,12 @@ class PaymentController extends Controller
                 'service_price' => $request->input('service-price'),
                 'total_payment' => $order->total_price + $request->input('shipping-price') + $request->input('service-price'),
             ]);
-
             $response = $midtans->chargeSnap($payment, $order, auth()->user());
             DB::commit();
-            return redirect()->to('https://app.sandbox.midtrans.com/snap/v4/redirection/' . $response);
+
+            return view('redirect', [
+                'redirect_url' => 'https://app.sandbox.midtrans.com/snap/v4/redirection/' . $response
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
