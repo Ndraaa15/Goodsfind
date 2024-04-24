@@ -40,7 +40,7 @@ class Cart extends Model
     {
         $cartItems = $this->cart_items;
         if ($cartItems == null || empty($cartItems) || $cartItems->count() == 0 || !empty($cart['total_price'])){
-            $this->where('id', $cart['cart_id'])->update(['total_price' => $cart['total_price']]);
+            $this->update(['total_price' => 0]);
         } else {
             $totalPrice = $cartItems->sum(function ($item) {
                 return $item->total_price_product;

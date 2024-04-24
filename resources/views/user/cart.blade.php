@@ -49,7 +49,7 @@ $serviceTax += $cartItem->product->merchant->service_price;
                                         Rp.{{($cartItem->product->price - ($cartItem->product->price * $cartItem->product->discount / 100))}}
                                     </td>
                                     <td class="remove-col">
-                                        <form id="delete-form" action="{{ route('delete-cart-item', ['product_id' => $cartItem->product_id])}}" method="POST">
+                                        <form id="delete-form" action="{{ route('delete-cart-item', ['product_id' => $cartItem->product_id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn-remove" onclick="deleteItem()">
