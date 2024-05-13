@@ -1,6 +1,11 @@
 @extends('layout.app')
 @section('content')
 <main class="main">
+    @error('error')
+    <script>
+        alert('{{ $message }}');
+    </script>
+    @enderror
     <div class="intro-section pt-3 pb-3 mb-2">
         <div class="container">
             <div class="row">

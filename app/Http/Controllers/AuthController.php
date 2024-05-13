@@ -65,7 +65,9 @@ class AuthController extends Controller
             ];
 
             if (!auth()->attempt($credentials)) {
-                return redirect()->route('auth')->with('error', 'Invalid email or password');
+                return redirect()->route('home')->withErrors([
+                    'error' => 'The provided credentials do not match our records.',
+                ]);
             }
 
             return redirect()->route('home', [
